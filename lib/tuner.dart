@@ -109,8 +109,7 @@ class PitchHelper {
   double lastPitch = 0;
   double lastAcceptPitch = 0;
 
-  int pitchAcceptCount = 0;
-  double pitchAcceptTotal = 0;
+  List<double> lastAcceptPitches = List<double>();
 
   int lastTimerTime = 0;
   bool updating = false;
@@ -153,8 +152,7 @@ class PitchHelper {
     lastRms = 0;
     lastString = -1;
     lastPitch = 0;
-    pitchAcceptCount = 0;
-    pitchAcceptTotal = 0;
+    lastAcceptPitches.clear();
   }
 
   PitchAcceptResult acceptPitch(result, TunerModel tunerModel) {
@@ -284,18 +282,23 @@ class PitchHelper {
 
 
     if (accept) {
-      pitchAcceptCount ++;
-      pitchAcceptTotal += pitch;
+      if (lastAcceptPitches.length >= 5) {
+        lastAcceptPitches.removeAt(0);
+      }
+      lastAcceptPitches.add(pitch);
+      var total = lastAcceptPitches.reduce((a,b ) => a + b);
+      _result.avgPitch = total / lastAcceptPitches.length;
+    } else {
+      _result.avgPitch = pitch;
     }
 
     _result.accept = accept;
     _result.string = string;
     _result.pitch = pitch;
-    _result.avgPitch = pitchAcceptTotal / pitchAcceptCount;
     _result.matches = matches;
 
 
-//    debugPrint("pitch $count [${accept ? "Y" : "N"}] $pitch[${hasResonance ? "2" : "1"}] ($prob%) matches=$matches rms=$rms($deltaRms) t=$ts($deltaTs) $reason");
+    debugPrint("pitch $count [${accept ? "Y" : "N"}] $pitch[${hasResonance ? "2" : "1"}] ($prob%) matches=$matches rms=$rms($deltaRms) t=$ts($deltaTs) $reason");
 
     lastTs = ts;
     lastRms = rms;
