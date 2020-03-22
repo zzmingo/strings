@@ -1,0 +1,84 @@
+{
+  "@@last_modified": "2020-03-17T15:34:27.554471",
+  "@@locale": "zh_CN",
+  "tuner": "调音器",
+  "@tuner": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "metronome": "节拍器",
+  "@metronome": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "auto": "自动",
+  "@auto": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "add": "添加",
+  "@add": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "delete": "删除",
+  "@delete": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "cancel": "取消",
+  "@cancel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "confirm": "确定",
+  "@confirm": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "noticeTitle": "提示",
+  "@noticeTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tunerSettings": "调音器设置",
+  "@tunerSettings": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "customTunings": "自定义调弦",
+  "@customTunings": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "customTuningsWithTips": "自定义调弦 (长按可删除)",
+  "@customTuningsWithTips": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "commonTunings": "常用调弦",
+  "@commonTunings": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "confirmDeleteTuning": "确定删除这个调弦?",
+  "@confirmDeleteTuning": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tuningNameDialogTitle": "调弦名称",
+  "@tuningNameDialogTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "meter": "拍子",
+  "@meter": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "bpm": "速度(BPM)",
+  "@bpm": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

@@ -1,0 +1,422 @@
+{
+  "C1": {
+    "pitch": 32.703,
+    "name": "C",
+    "octave": 1
+  },
+  "C2": {
+    "pitch": 65.406,
+    "name": "C",
+    "octave": 2
+  },
+  "C3": {
+    "pitch": 130.81,
+    "name": "C",
+    "octave": 3
+  },
+  "C4": {
+    "pitch": 261.63,
+    "name": "C",
+    "octave": 4
+  },
+  "C5": {
+    "pitch": 523.25,
+    "name": "C",
+    "octave": 5
+  },
+  "C6": {
+    "pitch": 1046.5,
+    "name": "C",
+    "octave": 6
+  },
+  "C7": {
+    "pitch": 2093,
+    "name": "C",
+    "octave": 7
+  },
+  "♯C1": {
+    "pitch": 34.648,
+    "name": "♯C",
+    "octave": 1
+  },
+  "♯C2": {
+    "pitch": 69.296,
+    "name": "♯C",
+    "octave": 2
+  },
+  "♯C3": {
+    "pitch": 138.59,
+    "name": "♯C",
+    "octave": 3
+  },
+  "♯C4": {
+    "pitch": 277.18,
+    "name": "♯C",
+    "octave": 4
+  },
+  "♯C5": {
+    "pitch": 554.37,
+    "name": "♯C",
+    "octave": 5
+  },
+  "♯C6": {
+    "pitch": 1108.7,
+    "name": "♯C",
+    "octave": 6
+  },
+  "♯C7": {
+    "pitch": 2217.5,
+    "name": "♯C",
+    "octave": 7
+  },
+  "D1": {
+    "pitch": 36.708,
+    "name": "D",
+    "octave": 1
+  },
+  "D2": {
+    "pitch": 73.416,
+    "name": "D",
+    "octave": 2
+  },
+  "D3": {
+    "pitch": 146.83,
+    "name": "D",
+    "octave": 3
+  },
+  "D4": {
+    "pitch": 293.66,
+    "name": "D",
+    "octave": 4
+  },
+  "D5": {
+    "pitch": 587.33,
+    "name": "D",
+    "octave": 5
+  },
+  "D6": {
+    "pitch": 1174.7,
+    "name": "D",
+    "octave": 6
+  },
+  "D7": {
+    "pitch": 2349.3,
+    "name": "D",
+    "octave": 7
+  },
+  "♯D1": {
+    "pitch": 38.891,
+    "name": "♯D",
+    "octave": 1
+  },
+  "♯D2": {
+    "pitch": 77.782,
+    "name": "♯D",
+    "octave": 2
+  },
+  "♯D3": {
+    "pitch": 155.56,
+    "name": "♯D",
+    "octave": 3
+  },
+  "♯D4": {
+    "pitch": 311.13,
+    "name": "♯D",
+    "octave": 4
+  },
+  "♯D5": {
+    "pitch": 622.25,
+    "name": "♯D",
+    "octave": 5
+  },
+  "♯D6": {
+    "pitch": 1244.5,
+    "name": "♯D",
+    "octave": 6
+  },
+  "♯D7": {
+    "pitch": 2489,
+    "name": "♯D",
+    "octave": 7
+  },
+  "E1": {
+    "pitch": 41.203,
+    "name": "E",
+    "octave": 1
+  },
+  "E2": {
+    "pitch": 82.407,
+    "name": "E",
+    "octave": 2
+  },
+  "E3": {
+    "pitch": 164.81,
+    "name": "E",
+    "octave": 3
+  },
+  "E4": {
+    "pitch": 329.63,
+    "name": "E",
+    "octave": 4
+  },
+  "E5": {
+    "pitch": 659.26,
+    "name": "E",
+    "octave": 5
+  },
+  "E6": {
+    "pitch": 1318.5,
+    "name": "E",
+    "octave": 6
+  },
+  "E7": {
+    "pitch": 2637,
+    "name": "E",
+    "octave": 7
+  },
+  "F1": {
+    "pitch": 43.654,
+    "name": "F",
+    "octave": 1
+  },
+  "F2": {
+    "pitch": 87.307,
+    "name": "F",
+    "octave": 2
+  },
+  "F3": {
+    "pitch": 174.61,
+    "name": "F",
+    "octave": 3
+  },
+  "F4": {
+    "pitch": 349.23,
+    "name": "F",
+    "octave": 4
+  },
+  "F5": {
+    "pitch": 698.46,
+    "name": "F",
+    "octave": 5
+  },
+  "F6": {
+    "pitch": 1396.9,
+    "name": "F",
+    "octave": 6
+  },
+  "F7": {
+    "pitch": 2793.8,
+    "name": "F",
+    "octave": 7
+  },
+  "♯F1": {
+    "pitch": 46.249,
+    "name": "♯F",
+    "octave": 1
+  },
+  "♯F2": {
+    "pitch": 92.499,
+    "name": "♯F",
+    "octave": 2
+  },
+  "♯F3": {
+    "pitch": 185,
+    "name": "♯F",
+    "octave": 3
+  },
+  "♯F4": {
+    "pitch": 369.99,
+    "name": "♯F",
+    "octave": 4
+  },
+  "♯F5": {
+    "pitch": 739.99,
+    "name": "♯F",
+    "octave": 5
+  },
+  "♯F6": {
+    "pitch": 1480,
+    "name": "♯F",
+    "octave": 6
+  },
+  "♯F7": {
+    "pitch": 2960,
+    "name": "♯F",
+    "octave": 7
+  },
+  "G1": {
+    "pitch": 48.999,
+    "name": "G",
+    "octave": 1
+  },
+  "G2": {
+    "pitch": 97.999,
+    "name": "G",
+    "octave": 2
+  },
+  "G3": {
+    "pitch": 196,
+    "name": "G",
+    "octave": 3
+  },
+  "G4": {
+    "pitch": 392,
+    "name": "G",
+    "octave": 4
+  },
+  "G5": {
+    "pitch": 783.99,
+    "name": "G",
+    "octave": 5
+  },
+  "G6": {
+    "pitch": 1568,
+    "name": "G",
+    "octave": 6
+  },
+  "G7": {
+    "pitch": 3136,
+    "name": "G",
+    "octave": 7
+  },
+  "♯G1": {
+    "pitch": 51.913,
+    "name": "♯G",
+    "octave": 1
+  },
+  "♯G2": {
+    "pitch": 103.83,
+    "name": "♯G",
+    "octave": 2
+  },
+  "♯G3": {
+    "pitch": 207.65,
+    "name": "♯G",
+    "octave": 3
+  },
+  "♯G4": {
+    "pitch": 415.3,
+    "name": "♯G",
+    "octave": 4
+  },
+  "♯G5": {
+    "pitch": 830.61,
+    "name": "♯G",
+    "octave": 5
+  },
+  "♯G6": {
+    "pitch": 1661.2,
+    "name": "♯G",
+    "octave": 6
+  },
+  "♯G7": {
+    "pitch": 3322.4,
+    "name": "♯G",
+    "octave": 7
+  },
+  "A1": {
+    "pitch": 55,
+    "name": "A",
+    "octave": 1
+  },
+  "A2": {
+    "pitch": 110,
+    "name": "A",
+    "octave": 2
+  },
+  "A3": {
+    "pitch": 220,
+    "name": "A",
+    "octave": 3
+  },
+  "A4": {
+    "pitch": 440,
+    "name": "A",
+    "octave": 4
+  },
+  "A5": {
+    "pitch": 880,
+    "name": "A",
+    "octave": 5
+  },
+  "A6": {
+    "pitch": 1760,
+    "name": "A",
+    "octave": 6
+  },
+  "A7": {
+    "pitch": 3520,
+    "name": "A",
+    "octave": 7
+  },
+  "♯A1": {
+    "pitch": 58.27,
+    "name": "♯A",
+    "octave": 1
+  },
+  "♯A2": {
+    "pitch": 116.54,
+    "name": "♯A",
+    "octave": 2
+  },
+  "♯A3": {
+    "pitch": 233.08,
+    "name": "♯A",
+    "octave": 3
+  },
+  "♯A4": {
+    "pitch": 466.16,
+    "name": "♯A",
+    "octave": 4
+  },
+  "♯A5": {
+    "pitch": 932.33,
+    "name": "♯A",
+    "octave": 5
+  },
+  "♯A6": {
+    "pitch": 1864.7,
+    "name": "♯A",
+    "octave": 6
+  },
+  "♯A7": {
+    "pitch": 3729.3,
+    "name": "♯A",
+    "octave": 7
+  },
+  "B1": {
+    "pitch": 61.735,
+    "name": "B",
+    "octave": 1
+  },
+  "B2": {
+    "pitch": 123.47,
+    "name": "B",
+    "octave": 2
+  },
+  "B3": {
+    "pitch": 246.94,
+    "name": "B",
+    "octave": 3
+  },
+  "B4": {
+    "pitch": 493.88,
+    "name": "B",
+    "octave": 4
+  },
+  "B5": {
+    "pitch": 987.77,
+    "name": "B",
+    "octave": 5
+  },
+  "B6": {
+    "pitch": 1975.5,
+    "name": "B",
+    "octave": 6
+  },
+  "B7": {
+    "pitch": 3951.1,
+    "name": "B",
+    "octave": 7
+  }
+}

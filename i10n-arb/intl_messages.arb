@@ -1,0 +1,73 @@
+{
+  "@@last_modified": "2020-03-21T15:19:27.140731",
+  "appName": "Strings",
+  "@appName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tuner": "Tuner",
+  "@tuner": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "auto": "Auto",
+  "@auto": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "add": "Add",
+  "@add": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "delete": "Delete",
+  "@delete": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "confirm": "Confirm",
+  "@confirm": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "noticeTitle": "Notice",
+  "@noticeTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tunerSettings": "Tuner Settings",
+  "@tunerSettings": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "customTunings": "Custom tunings",
+  "@customTunings": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "customTuningsWithTips": "Custom tunings (long press to delete)",
+  "@customTuningsWithTips": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "commonTunings": "Common tunings",
+  "@commonTunings": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "confirmDeleteTuning": "Delete this tuning?",
+  "@confirmDeleteTuning": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tuningNameDialogTitle": "Tuning name",
+  "@tuningNameDialogTitle": {
+    "type": "text",
+    "placeholders": {}
+  }
+}
