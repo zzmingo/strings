@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-03-23T14:37:13.452689",
+  "@@last_modified": "2020-03-23T15:41:20.996987",
   "appName": "Strings",
   "@appName": {
     "type": "text",
@@ -107,6 +107,16 @@
   },
   "errorTipsStringsEmpty": "Please select strings.",
   "@errorTipsStringsEmpty": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "autoImageName": "auto-en",
+  "@autoImageName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "autoImageHName": "auto-h-en",
+  "@autoImageHName": {
     "type": "text",
     "placeholders": {}
   }

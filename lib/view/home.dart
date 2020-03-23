@@ -58,7 +58,11 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   }
 
   void _onPitchIdle() {
-
+    setState(() {
+      _offsetX = 0;
+      _pitchText = "0";
+      _pitchCorrect = true;
+    });
   }
 
   void _toSettingsPage() async {
@@ -74,7 +78,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     var i18n = StringsLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(i18n.appName),
+        title: Text(i18n.appName, style: TextStyle(fontFamily: "LogoFont")),
+        centerTitle: true,
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.settings),
@@ -162,6 +167,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                                   _pitchText,
                                   style: TextStyle(
                                       fontSize: 20,
+                                      fontFamily: "LabelFont",
                                       fontWeight: FontWeight.bold,
                                       color: _pitchCorrect ? Color(0xFF01E7E1) : Color(0xFFD61756)
                                   ),
@@ -182,6 +188,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   }
 
   Widget _getGuitarPart() {
+    var i18n = StringsLocalizations.of(context);
     return Stack(
       children: <Widget>[
         Container(
@@ -258,7 +265,12 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                       padding: EdgeInsets.all(0),
                       child: Consumer<TunerModel>(
                         builder: (context, tunerModel, child) {
-                          return Text(tunerModel.tuning.name);
+                          return Text(tunerModel.tuning.name,
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontFamily: "LabelFont",
+                            )
+                          );
                         },
                       ),
                       onPressed: _toSettingsPage,
@@ -274,7 +286,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                             tuner.toggleAuto();
                           },
                           child: Image.asset(
-                            tuner.auto ? "assets/auto-h.png" : "assets/auto.png",
+                            tuner.auto ? "assets/${i18n.autoImageHName}.png" : "assets/${i18n.autoImageName}.png",
                             width: Sizes.width(142),
                             height: Sizes.width(62),
                           ),
@@ -323,5 +335,9 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
           );
         }
     );
+  }
+
+  Widget _getAutoButton(BuildContext context) {
+
   }
 }

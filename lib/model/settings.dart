@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:strings/model/common.dart';
 
 const String _CUSTOM_TUNINGS_KEY = "mingo.strings.settings.customTunings";
+const String _SELECTED_TUNING_KEY = "mingo.strings.settings.selectedTuning";
 
 class SettingsModel extends ChangeNotifier {
 
@@ -37,14 +38,11 @@ class SettingsModel extends ChangeNotifier {
     var prefs = await SharedPreferences.getInstance();
     if (prefs.containsKey(_CUSTOM_TUNINGS_KEY)) {
       var jsonStr = prefs.getString(_CUSTOM_TUNINGS_KEY);
-      debugPrint(jsonStr);
       var jsonList = jsonDecode(jsonStr);
       jsonList.forEach((item) {
         _customTunings.add(Tuning.fromJson(item));
       });
     }
-
-    _tuningId = _builtinTunings.first.id;
 
     _tuningMap = Map<String, Tuning>();
     _builtinTunings.forEach((tuning) {
@@ -53,6 +51,14 @@ class SettingsModel extends ChangeNotifier {
     _customTunings.forEach((tuning) {
       _tuningMap[tuning.id] = tuning;
     });
+
+    _tuningId = _builtinTunings.first.id;
+    if (prefs.containsKey(_SELECTED_TUNING_KEY)) {
+      _tuningId = prefs.getString(_SELECTED_TUNING_KEY);
+    }
+    if (!_tuningMap.containsKey(_tuningId)) {
+      _tuningId = _builtinTunings.first.id;
+    }
   }
 
   void addCustomTuning(Tuning tuning) async {
@@ -76,9 +82,12 @@ class SettingsModel extends ChangeNotifier {
     save();
   }
 
-  void selectTuning(String tuningId) {
+  void selectTuning(String tuningId) async {
     _tuningId = tuningId;
     notifyListeners();
+
+    var prefs = await SharedPreferences.getInstance();
+    prefs.setString(_SELECTED_TUNING_KEY, _tuningId);
   }
 
   void save() async {

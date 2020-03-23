@@ -146,7 +146,8 @@ class _SettingsPageState extends State<SettingsPage> {
                           child: Text(
                             tuning.name,
                             style: TextStyle(
-                              fontSize: 15,
+                              fontSize: 14,
+                              fontFamily: "LabelFont",
                             )
                           ),
                         ),

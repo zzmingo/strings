@@ -3,7 +3,7 @@ package mingo.strings
 import android.Manifest
 import android.content.pm.PackageManager.*
 import android.os.Bundle
-import androidx.annotation.NonNull;
+import androidx.annotation.NonNull
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import be.tarsos.dsp.AudioDispatcher
@@ -13,9 +13,13 @@ import be.tarsos.dsp.pitch.PitchDetectionHandler
 import be.tarsos.dsp.pitch.PitchDetectionResult
 import be.tarsos.dsp.pitch.PitchProcessor
 import io.flutter.embedding.android.FlutterActivity
+import io.flutter.embedding.android.SplashScreen
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugins.GeneratedPluginRegistrant
+import io.flutter.embedding.android.DrawableSplashScreen
+import mingo.strings.R
+
 
 class MainActivity: FlutterActivity(), PitchDetectionHandler, EventChannel.StreamHandler {
 
@@ -28,6 +32,14 @@ class MainActivity: FlutterActivity(), PitchDetectionHandler, EventChannel.Strea
 
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         GeneratedPluginRegistrant.registerWith(flutterEngine)
+    }
+
+    override fun provideSplashScreen(): SplashScreen? {
+        val splash = resources.getDrawable(R.drawable.launch_background)
+
+        // Construct a DrawableSplashScreen with the loaded splash Drawable and
+        // return it.
+        return DrawableSplashScreen(splash)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

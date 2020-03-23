@@ -27,6 +27,7 @@ dev_dependencies:
   json_serializable: ^2.0.0
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.7.3
 
 flutter:
   uses-material-design: true
@@ -38,3 +39,14 @@ flutter:
     - family: NoteFont
       fonts:
         - asset: fonts/Puritan-Bold.ttf
+    - family: LabelFont
+      fonts:
+        - asset: fonts/OxygenMono-Regular.ttf
+    - family: LogoFont
+      fonts:
+        - asset: fonts/Fely.ttf
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon2048.png"

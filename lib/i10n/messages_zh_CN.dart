@@ -24,6 +24,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "add" : MessageLookupByLibrary.simpleMessage("添加"),
     "addCustomTuning" : MessageLookupByLibrary.simpleMessage("自定义调弦"),
     "auto" : MessageLookupByLibrary.simpleMessage("自动"),
+    "autoImageHName" : MessageLookupByLibrary.simpleMessage("auto-h"),
+    "autoImageName" : MessageLookupByLibrary.simpleMessage("auto"),
     "cancel" : MessageLookupByLibrary.simpleMessage("取消"),
     "commonTunings" : MessageLookupByLibrary.simpleMessage("常用调弦"),
     "confirm" : MessageLookupByLibrary.simpleMessage("确定"),

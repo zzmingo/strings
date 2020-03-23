@@ -48,7 +48,6 @@ class StringsApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         StringsLocalizationsDelegate(),
       ],
-      locale: Locale('zh', 'CN'),
       supportedLocales: [
         const Locale('en', 'US'), // 美国英语
         const Locale('zh', 'CN'), // 中文简体

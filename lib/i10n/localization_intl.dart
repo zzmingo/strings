@@ -39,6 +39,8 @@ class StringsLocalizations {
   String get ok => Intl.message("OK", name: "ok");
   String get errorTipsTuningName => Intl.message("Name cannot be empty.", name: "errorTipsTuningName");
   String get errorTipsStringsEmpty => Intl.message("Please select strings.", name: "errorTipsStringsEmpty");
+  String get autoImageName => Intl.message("auto-en", name: "autoImageName");
+  String get autoImageHName => Intl.message("auto-h-en", name: "autoImageHName");
 
 
 }

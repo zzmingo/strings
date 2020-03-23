@@ -120,5 +120,15 @@
   "@errorTipsStringsEmpty": {
     "type": "text",
     "placeholders": {}
+  },
+  "autoImageName": "auto",
+  "@autoImageName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "autoImageHName": "auto-h",
+  "@autoImageHName": {
+    "type": "text",
+    "placeholders": {}
   }
 }

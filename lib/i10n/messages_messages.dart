@@ -25,6 +25,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "addCustomTuning" : MessageLookupByLibrary.simpleMessage("Add custom tuning"),
     "appName" : MessageLookupByLibrary.simpleMessage("Strings"),
     "auto" : MessageLookupByLibrary.simpleMessage("Auto"),
+    "autoImageHName" : MessageLookupByLibrary.simpleMessage("auto-h-en"),
+    "autoImageName" : MessageLookupByLibrary.simpleMessage("auto-en"),
     "cancel" : MessageLookupByLibrary.simpleMessage("Cancel"),
     "commonTunings" : MessageLookupByLibrary.simpleMessage("Common tunings"),
     "confirm" : MessageLookupByLibrary.simpleMessage("Confirm"),
