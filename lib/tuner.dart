@@ -311,7 +311,6 @@ class PitchHelper {
     var pitchDelta = double.maxFinite;
     var found = tunerModel.string;
     var index = 0;
-    debugPrint(tunerModel.tuning.notes.join(" "));
     tunerModel.tuning.notes.forEach((item) {
       var stringPitch = tunerModel.noteMap[item].pitch;
       var delta = (stringPitch - pitch).abs();

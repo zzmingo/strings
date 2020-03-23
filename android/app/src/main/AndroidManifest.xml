@@ -15,7 +15,7 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="strings"
+        android:label="Strings"
         android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"

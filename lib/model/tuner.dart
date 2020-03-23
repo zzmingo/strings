@@ -49,7 +49,6 @@ class TunerModel extends ChangeNotifier {
   }
 
   void selectString(int string) {
-    debugPrint("select string");
     this._string = string;
     notifyListeners();
   }
