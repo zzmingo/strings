@@ -282,7 +282,7 @@ class PitchHelper {
 
 
     if (accept) {
-      if (lastAcceptPitches.length >= 5) {
+      if (lastAcceptPitches.length >= 3) {
         lastAcceptPitches.removeAt(0);
       }
       lastAcceptPitches.add(pitch);
@@ -298,7 +298,7 @@ class PitchHelper {
     _result.matches = matches;
 
 
-//    debugPrint("pitch $count [${accept ? "Y" : "N"}] $pitch[${hasResonance ? "2" : "1"}] ($prob%) matches=$matches rms=$rms($deltaRms) t=$ts($deltaTs) $reason");
+    debugPrint("pitch $count [${accept ? "Y" : "N"}] $pitch[${hasResonance ? "2" : "1"}] ($prob%) matches=$matches rms=$rms($deltaRms) t=$ts($deltaTs) $reason");
 
     lastTs = ts;
     lastRms = rms;
