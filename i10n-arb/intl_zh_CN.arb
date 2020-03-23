@@ -80,5 +80,10 @@
   "@bpm": {
     "type": "text",
     "placeholders": {}
+  },
+  "noCustomTunings": "没有自定义调弦",
+  "@noCustomTunings": {
+    "type": "text",
+    "placeholders": {}
   }
 }

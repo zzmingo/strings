@@ -2,47 +2,34 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:json_annotation/json_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:strings/model/common.dart';
+import 'package:strings/model/settings.dart';
 
 class TunerModel extends ChangeNotifier {
 
-  // 持久化状态
-  String _tuningId;
-  bool _auto = true;
-  List<Tuning> _customTunings;
-
-  // 以下是临时状态
-  @JsonKey(ignore: true)
-  int _string = 5;
-
-  @JsonKey(ignore: true)
   bool _loading = true;
 
-  @JsonKey(ignore: true)
+  bool _auto = true;
+  int _string = 5;
+
+
   Map<String, Note> _noteMap;
 
-  @JsonKey(ignore: true)
-  Map<String, Tuning> _tuningMap;
+  SettingsModel _settingsModel;
 
-  @JsonKey(ignore: true)
-  List<Tuning> _builtinTunings;
-
-  SharedPreferences _prefs;
-
-  TunerModel() {
-    load();
-  }
+  TunerModel(this._settingsModel);
 
   bool get loading => _loading;
   bool get auto => _auto;
   int get string => _string;
-  Tuning get tuning => _tuningMap[_tuningId];
+  Tuning get tuning => _settingsModel.tuning;
   Map<String, Note> get noteMap => _noteMap;
   Note get selectedNote => noteMap[tuning.notes[string]];
 
-  void load() async {
+  Future<Null> load() async {
+    await this._settingsModel.load();
+
     String noteJson = await rootBundle.loadString("assets/notes.json");
     Map<String, dynamic> noteRawMap = jsonDecode(noteJson);
     _noteMap = Map<String, Note>();
@@ -50,26 +37,7 @@ class TunerModel extends ChangeNotifier {
       _noteMap[key] = Note.fromJson(value);
     });
 
-    _builtinTunings = List<Tuning>();
-    var tuning = Tuning();
-    tuning.id = "strings.builtin.tuning.standard";
-    tuning.name = "Standard";
-    tuning.notes = "E2,A2,D3,G3,B3,E4".split(",").toList();
-    _builtinTunings.add(tuning);
-    tuning = Tuning();
-    tuning.id = "strings.builtin.tuning.openD";
-    tuning.name = "Open D";
-    tuning.notes = "D2,A2,♯F3,D3,A3,D4".split(",").toList();
-    _builtinTunings.add(tuning);
-
-    _tuningId = _builtinTunings.first.id;
-
-    _tuningMap = Map<String, Tuning>();
-    _builtinTunings.forEach((tuning) {
-      _tuningMap[tuning.id] = tuning;
-    });
-
-    _prefs = await SharedPreferences.getInstance();
+    var prefs = await SharedPreferences.getInstance();
 
     _loading = false;
     notifyListeners();

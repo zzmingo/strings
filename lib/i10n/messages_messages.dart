@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "customTunings" : MessageLookupByLibrary.simpleMessage("Custom tunings"),
     "customTuningsWithTips" : MessageLookupByLibrary.simpleMessage("Custom tunings (long press to delete)"),
     "delete" : MessageLookupByLibrary.simpleMessage("Delete"),
+    "noCustomTunings" : MessageLookupByLibrary.simpleMessage("No custom tuning"),
     "noticeTitle" : MessageLookupByLibrary.simpleMessage("Notice"),
     "tuner" : MessageLookupByLibrary.simpleMessage("Tuner"),
     "tunerSettings" : MessageLookupByLibrary.simpleMessage("Tuner Settings"),

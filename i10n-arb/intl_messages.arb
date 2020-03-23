@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-03-21T15:19:27.140731",
+  "@@last_modified": "2020-03-23T11:53:52.579308",
   "appName": "Strings",
   "@appName": {
     "type": "text",
@@ -67,6 +67,11 @@
   },
   "tuningNameDialogTitle": "Tuning name",
   "@tuningNameDialogTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "noCustomTunings": "No custom tuning",
+  "@noCustomTunings": {
     "type": "text",
     "placeholders": {}
   }

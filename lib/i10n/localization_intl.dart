@@ -31,6 +31,7 @@ class StringsLocalizations {
   String get commonTunings => Intl.message("Common tunings", name: 'commonTunings');
   String get confirmDeleteTuning => Intl.message("Delete this tuning?", name: "confirmDeleteTuning");
   String get tuningNameDialogTitle => Intl.message("Tuning name", name: "tuningNameDialogTitle");
+  String get noCustomTunings => Intl.message("No custom tuning", name: "noCustomTunings");
 
 }
 

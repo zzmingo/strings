@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "customTunings" : MessageLookupByLibrary.simpleMessage("自定义调弦"),
     "customTuningsWithTips" : MessageLookupByLibrary.simpleMessage("自定义调弦 (长按可删除)"),
     "delete" : MessageLookupByLibrary.simpleMessage("删除"),
+    "noCustomTunings" : MessageLookupByLibrary.simpleMessage("没有自定义调弦"),
     "noticeTitle" : MessageLookupByLibrary.simpleMessage("提示"),
     "tuner" : MessageLookupByLibrary.simpleMessage("调音器"),
     "tunerSettings" : MessageLookupByLibrary.simpleMessage("调音器设置"),
