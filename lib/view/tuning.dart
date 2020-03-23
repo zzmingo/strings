@@ -20,7 +20,6 @@ class _TuningPageState extends State<TuningPage> {
 
   _onTapStringsField(BuildContext context) async {
     var theme = Theme.of(context);
-    var i18n = StringsLocalizations.of(context);
     bool confirmed = false;
     Picker picker;
     picker = new Picker(
@@ -44,24 +43,24 @@ class _TuningPageState extends State<TuningPage> {
       backgroundColor: theme.canvasColor,
       containerColor: theme.canvasColor,
       headercolor: theme.canvasColor,
-      textStyle: TextStyle(fontSize: 24, fontFamily: "Kiddemo"),
-      selectedTextStyle: TextStyle(color: theme.accentColor, fontSize: 24, fontFamily: "Kiddemo"),
+      textStyle: TextStyle(fontSize: 24, fontFamily: "NoteFont"),
+      selectedTextStyle: TextStyle(color: theme.accentColor, fontSize: 24, fontFamily: "NoteFont"),
       onConfirm: (Picker picker, List value) {
         confirmed = true;
       },
     );
     await picker.showModal(context);
     if (confirmed) {
-      _stringsController.text = picker.getSelectedValues().join(",").replaceAll("y", "#");
+      _stringsController.text = picker.getSelectedValues().join(" ");
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
+    var i18n = StringsLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add custom tuning'),
+        title: Text(i18n.addCustomTuning),
       ),
       body: Padding(
         padding: EdgeInsets.all(20),
@@ -73,24 +72,22 @@ class _TuningPageState extends State<TuningPage> {
               TextFormField(
                 controller: _nameController,
                 decoration: InputDecoration(
-                  labelText: "Tuning",
-                  hintText: "Name for this tuning",
+                  labelText: i18n.tuningName,
+                  hintText: i18n.nameForTuning,
                   prefixIcon: Icon(Icons.edit)
                 ),
-                validator: (v) {
-                  return v.trim().length > 0 ? null : "Name cannot be empty.";
-                },
               ),
               TextFormField(
                 controller: _stringsController,
                 decoration: InputDecoration(
-                  labelText: "Strings",
-                  hintText: "Strings for this tuning",
+                  labelText: i18n.strings,
                   prefixIcon: Icon(Icons.sort),
+                  labelStyle: TextStyle(fontFamily: ""),
                 ),
                 readOnly: true,
+                style: TextStyle(fontFamily: "NoteFont", fontSize: 22),
                 validator: (v) {
-                  return v.trim().length > 0 ? null : "Please select strings.";
+                  return v.trim().length > 0 ? null : i18n.errorTipsStringsEmpty;
                 },
                 onTap: () {
                   _onTapStringsField(context);
@@ -103,14 +100,14 @@ class _TuningPageState extends State<TuningPage> {
                     Expanded(
                       child: RaisedButton(
                         padding: EdgeInsets.all(15.0),
-                        child: Text("OK"),
+                        child: Text(i18n.ok),
                         textColor: Colors.white,
                         onPressed: () {
                           if((_formKey.currentState as FormState).validate()) {
                             Tuning tuning = Tuning();
                             tuning.id = "tuning_${DateTime.now().millisecondsSinceEpoch}";
                             tuning.name = _nameController.text.trim();
-                            tuning.notes = _stringsController.text.replaceAll("#", "♯").split(",");
+                            tuning.notes = _stringsController.text.split(" ");
                             Navigator.pop(context, tuning);
                           }
                         },

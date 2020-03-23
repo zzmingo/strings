@@ -54,7 +54,7 @@ class DisplayHelper {
 
   static List<int> getStringsSelects(BuildContext context) {
     _ensureAllNotes(context);
-    return "E2,A2,D3,G3,B3,E4".split(",").map((note) {
+    return "E2 A2 D3 G3 B3 E4".split(" ").map((note) {
       return allNotes.indexOf(note);
     }).toList();
   }
@@ -81,9 +81,6 @@ class DisplayHelper {
         var bNote = noteMap[b];
         return aNote.pitch - bNote.pitch > 0 ? 1 : -1;
       });
-      allNotes = allNotes.map((item) {
-        return item.replaceFirst("♯", "y");
-      }).toList();
     }
   }
 

@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "add" : MessageLookupByLibrary.simpleMessage("Add"),
+    "addCustomTuning" : MessageLookupByLibrary.simpleMessage("Add custom tuning"),
     "appName" : MessageLookupByLibrary.simpleMessage("Strings"),
     "auto" : MessageLookupByLibrary.simpleMessage("Auto"),
     "cancel" : MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -31,10 +32,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "customTunings" : MessageLookupByLibrary.simpleMessage("Custom tunings"),
     "customTuningsWithTips" : MessageLookupByLibrary.simpleMessage("Custom tunings (long press to delete)"),
     "delete" : MessageLookupByLibrary.simpleMessage("Delete"),
+    "errorTipsStringsEmpty" : MessageLookupByLibrary.simpleMessage("Please select strings."),
+    "errorTipsTuningName" : MessageLookupByLibrary.simpleMessage("Name cannot be empty."),
+    "nameForTuning" : MessageLookupByLibrary.simpleMessage("Name for this tuning"),
     "noCustomTunings" : MessageLookupByLibrary.simpleMessage("No custom tuning"),
     "noticeTitle" : MessageLookupByLibrary.simpleMessage("Notice"),
+    "ok" : MessageLookupByLibrary.simpleMessage("OK"),
+    "strings" : MessageLookupByLibrary.simpleMessage("Strings"),
     "tuner" : MessageLookupByLibrary.simpleMessage("Tuner"),
     "tunerSettings" : MessageLookupByLibrary.simpleMessage("Tuner Settings"),
+    "tuningName" : MessageLookupByLibrary.simpleMessage("Tuning name"),
     "tuningNameDialogTitle" : MessageLookupByLibrary.simpleMessage("Tuning name")
   };
 }

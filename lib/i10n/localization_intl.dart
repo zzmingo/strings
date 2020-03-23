@@ -32,6 +32,14 @@ class StringsLocalizations {
   String get confirmDeleteTuning => Intl.message("Delete this tuning?", name: "confirmDeleteTuning");
   String get tuningNameDialogTitle => Intl.message("Tuning name", name: "tuningNameDialogTitle");
   String get noCustomTunings => Intl.message("No custom tuning", name: "noCustomTunings");
+  String get tuningName => Intl.message("Tuning name", name: "tuningName");
+  String get strings => Intl.message("Strings", name: "strings");
+  String get nameForTuning => Intl.message("Name for this tuning", name: "nameForTuning");
+  String get addCustomTuning => Intl.message("Add custom tuning", name: "addCustomTuning");
+  String get ok => Intl.message("OK", name: "ok");
+  String get errorTipsTuningName => Intl.message("Name cannot be empty.", name: "errorTipsTuningName");
+  String get errorTipsStringsEmpty => Intl.message("Please select strings.", name: "errorTipsStringsEmpty");
+
 
 }
 

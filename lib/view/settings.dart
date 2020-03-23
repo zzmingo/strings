@@ -25,6 +25,32 @@ class _SettingsPageState extends State<SettingsPage> {
     settingsModel.addCustomTuning(tuning);
   }
 
+  _onLongPressTuning(settingsModel, tuning) {
+    var i18n = StringsLocalizations.of(context);
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(i18n.noticeTitle),
+          content: Text(i18n.confirmDeleteTuning),
+          actions: <Widget>[
+            FlatButton(
+              child: Text(i18n.cancel),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            FlatButton(
+              child: Text(i18n.delete),
+              onPressed: () {
+                settingsModel.removeCustomTuning(tuning);
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -98,6 +124,11 @@ class _SettingsPageState extends State<SettingsPage> {
                   onTap: () {
                     settingsModel.selectTuning(tuning.id);
                   },
+                  onLongPress: () {
+                    if (section == 0) {
+                      _onLongPressTuning(settingsModel, tuning);
+                    }
+                  },
                   child: AnimatedContainer(
                     key: Key(tuning.id),
                     padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
@@ -115,16 +146,17 @@ class _SettingsPageState extends State<SettingsPage> {
                           child: Text(
                             tuning.name,
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 15,
                             )
                           ),
                         ),
                         Expanded(
                           flex: 3,
                           child: Text(
-                            tuning.notes.join(",").replaceAll("♯", "#"),
+                            tuning.notes.join(" "),
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 18,
+                              fontFamily: "NoteFont"
                             )
                           ),
                         ),

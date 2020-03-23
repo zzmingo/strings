@@ -85,5 +85,40 @@
   "@noCustomTunings": {
     "type": "text",
     "placeholders": {}
+  },
+  "tuningName": "调弦名称",
+  "@tuningName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "strings": "调弦",
+  "@strings": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "nameForTuning": "",
+  "@nameForTuning": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "addCustomTuning": "自定义调弦",
+  "@addCustomTuning": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ok": "确 定",
+  "@ok": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errorTipsTuningName": "名称不能为空",
+  "@errorTipsTuningName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errorTipsStringsEmpty": "请选择一个调弦",
+  "@errorTipsStringsEmpty": {
+    "type": "text",
+    "placeholders": {}
   }
 }

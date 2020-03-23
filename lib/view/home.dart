@@ -195,10 +195,10 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                       child: Transform.translate(
                           offset: Offset(0, Sizes.width(-20)),
                           child: Text(
-                            tuner.tuning.notes[tuner.string].replaceFirst("♯", "y"),
+                            tuner.tuning.notes[tuner.string],
                             style: TextStyle(
                               fontSize: 42,
-                              fontFamily: "Kiddemo",
+                              fontFamily: "NoteFont",
                               color: Color(0xFF266064),
                             ),
                           )
@@ -256,9 +256,10 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                     height: Sizes.width(62),
                     child: OutlineButton(
                       padding: EdgeInsets.all(0),
-                      child: Text(
-                        "Standard",
-                        style: TextStyle(color: Color(0xFF4B429E)),
+                      child: Consumer<TunerModel>(
+                        builder: (context, tunerModel, child) {
+                          return Text(tunerModel.tuning.name);
+                        },
                       ),
                       onPressed: _toSettingsPage,
                     ),
@@ -308,11 +309,11 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                       Align(
                         alignment: Alignment.center,
                         child: Text(
-                            tuner.noteMap[tuner.tuning.notes[string]].name.replaceFirst("♯", "y"),
+                            tuner.noteMap[tuner.tuning.notes[string]].name,
                             style: TextStyle(
                               color: string == tuner.string ? Colors.blueAccent : Color(0xFF58545A),
                               fontSize: 40,
-                              fontFamily: "Kiddemo",
+                              fontFamily: "NoteFont",
                             )
                         ),
                       )

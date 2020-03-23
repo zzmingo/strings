@@ -35,6 +35,6 @@ flutter:
     - assets/
 
   fonts:
-    - family: Kiddemo
+    - family: NoteFont
       fonts:
-        - asset: fonts/Kiddemo.ttf
+        - asset: fonts/Puritan-Bold.ttf

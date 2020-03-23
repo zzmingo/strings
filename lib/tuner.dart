@@ -298,7 +298,7 @@ class PitchHelper {
     _result.matches = matches;
 
 
-    debugPrint("pitch $count [${accept ? "Y" : "N"}] $pitch[${hasResonance ? "2" : "1"}] ($prob%) matches=$matches rms=$rms($deltaRms) t=$ts($deltaTs) $reason");
+//    debugPrint("pitch $count [${accept ? "Y" : "N"}] $pitch[${hasResonance ? "2" : "1"}] ($prob%) matches=$matches rms=$rms($deltaRms) t=$ts($deltaTs) $reason");
 
     lastTs = ts;
     lastRms = rms;
@@ -311,6 +311,7 @@ class PitchHelper {
     var pitchDelta = double.maxFinite;
     var found = tunerModel.string;
     var index = 0;
+    debugPrint(tunerModel.tuning.notes.join(" "));
     tunerModel.tuning.notes.forEach((item) {
       var stringPitch = tunerModel.noteMap[item].pitch;
       var delta = (stringPitch - pitch).abs();
