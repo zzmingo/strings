@@ -81,7 +81,7 @@ class _TuningPageState extends State<TuningPage> {
                 controller: _stringsController,
                 decoration: InputDecoration(
                   labelText: i18n.strings,
-                  prefixIcon: Icon(Icons.sort),
+                  prefixIcon: Icon(Icons.format_align_justify),
                   labelStyle: TextStyle(fontFamily: ""),
                 ),
                 readOnly: true,
