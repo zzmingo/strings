@@ -21,6 +21,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "acousticGuitar" : MessageLookupByLibrary.simpleMessage("Acoustic guitar"),
     "add" : MessageLookupByLibrary.simpleMessage("Add"),
     "addCustomTuning" : MessageLookupByLibrary.simpleMessage("Add custom tuning"),
     "appName" : MessageLookupByLibrary.simpleMessage("Strings"),
@@ -34,8 +35,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "customTunings" : MessageLookupByLibrary.simpleMessage("Custom tunings"),
     "customTuningsWithTips" : MessageLookupByLibrary.simpleMessage("Custom tunings (long press to delete)"),
     "delete" : MessageLookupByLibrary.simpleMessage("Delete"),
+    "electricGuitar" : MessageLookupByLibrary.simpleMessage("Electric Guitar"),
     "errorTipsStringsEmpty" : MessageLookupByLibrary.simpleMessage("Please select strings."),
     "errorTipsTuningName" : MessageLookupByLibrary.simpleMessage("Name cannot be empty."),
+    "guitarHead" : MessageLookupByLibrary.simpleMessage("Deghead"),
     "nameForTuning" : MessageLookupByLibrary.simpleMessage("Name for this tuning"),
     "noCustomTunings" : MessageLookupByLibrary.simpleMessage("No custom tuning"),
     "noticeTitle" : MessageLookupByLibrary.simpleMessage("Notice"),

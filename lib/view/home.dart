@@ -215,9 +215,13 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
               ),
               Expanded(
                 flex: 1,
-                child: Image.asset(
-                  "assets/jita.png",
-                  width: Sizes.width(350),
+                child: Consumer<TunerModel>(
+                  builder: (context, tuner, child) {
+                    return Image.asset(
+                      tuner.guitarHead == 0 ? "assets/jita.png" : "assets/dianjita.png",
+                      width: Sizes.width(350),
+                    );
+                  },
                 ),
               )
             ],
@@ -227,36 +231,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             width: Sizes.screenW,
             child: Stack(
               children: <Widget>[
-                Align(
-                  alignment: Alignment.center,
-                  child: Row(
-                    children: <Widget>[
-                      SizedBox(width: Sizes.width(32)),
-                      Column(
-                        children: <Widget>[
-                          SizedBox(height: Sizes.width(84)),
-                          _getNoteCircle(2),
-                          SizedBox(height: Sizes.width(50)),
-                          _getNoteCircle(1),
-                          SizedBox(height: Sizes.width(50)),
-                          _getNoteCircle(0),
-                        ],
-                      ),
-                      Expanded(flex: 1, child: Container()),
-                      Column(
-                        children: <Widget>[
-                          SizedBox(height: Sizes.width(84)),
-                          _getNoteCircle(3),
-                          SizedBox(height: Sizes.width(50)),
-                          _getNoteCircle(4),
-                          SizedBox(height: Sizes.width(50)),
-                          _getNoteCircle(5),
-                        ],
-                      ),
-                      SizedBox(width: Sizes.width(32)),
-                    ],
-                  ),
-                ),
+                _getNoteCircleLayout(context),
                 Align(
                   alignment: Alignment(-0.8, 0.8),
                   child: SizedBox(
@@ -298,6 +273,78 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             )
         )
       ],
+    );
+  }
+
+  Widget _getNoteCircleLayout(BuildContext context) {
+    return Consumer<TunerModel>(
+        builder: (context, tuner, child) {
+
+          if (tuner.guitarHead == 1) {
+            return Align(
+              alignment: Alignment.center,
+              child: Row(
+                children: <Widget>[
+                  SizedBox(width: Sizes.width(32)),
+                  Column(
+                    children: <Widget>[
+                      SizedBox(height: Sizes.width(84)),
+                      SizedBox(height: Sizes.width(100)),
+                      _getNoteCircle(2),
+                      SizedBox(height: Sizes.width(20)),
+                      _getNoteCircle(1),
+                      SizedBox(height: Sizes.width(20)),
+                      _getNoteCircle(0),
+                    ],
+                  ),
+                  Expanded(flex: 1, child: Container()),
+                  Column(
+                    children: <Widget>[
+                      SizedBox(height: Sizes.width(54)),
+                      _getNoteCircle(3),
+                      SizedBox(height: Sizes.width(20)),
+                      _getNoteCircle(4),
+                      SizedBox(height: Sizes.width(20)),
+                      _getNoteCircle(5),
+                    ],
+                  ),
+                  SizedBox(width: Sizes.width(32)),
+                ],
+              ),
+            );
+          }
+
+          return Align(
+            alignment: Alignment.center,
+            child: Row(
+              children: <Widget>[
+                SizedBox(width: Sizes.width(32)),
+                Column(
+                  children: <Widget>[
+                    SizedBox(height: Sizes.width(84)),
+                    _getNoteCircle(2),
+                    SizedBox(height: Sizes.width(50)),
+                    _getNoteCircle(1),
+                    SizedBox(height: Sizes.width(50)),
+                    _getNoteCircle(0),
+                  ],
+                ),
+                Expanded(flex: 1, child: Container()),
+                Column(
+                  children: <Widget>[
+                    SizedBox(height: Sizes.width(84)),
+                    _getNoteCircle(3),
+                    SizedBox(height: Sizes.width(50)),
+                    _getNoteCircle(4),
+                    SizedBox(height: Sizes.width(50)),
+                    _getNoteCircle(5),
+                  ],
+                ),
+                SizedBox(width: Sizes.width(32)),
+              ],
+            ),
+          );
+        }
     );
   }
 

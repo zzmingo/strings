@@ -13,7 +13,179 @@ class SettingsPage extends StatefulWidget {
   _SettingsPageState createState() => _SettingsPageState();
 }
 
+enum _SettingsSection {
+  HeadType,
+  CustomTunings,
+  CommonTunings,
+}
+
 class _SettingsPageState extends State<SettingsPage> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+
+  String _getSectionTitle(index) {
+    var i18n = StringsLocalizations.of(context);
+    var section = _SettingsSection.values[index];
+    switch (section) {
+      case _SettingsSection.HeadType: return i18n.guitarHead;
+      case _SettingsSection.CustomTunings: return i18n.customTunings;
+      case _SettingsSection.CommonTunings: return i18n.commonTunings;
+      default: return "";
+    }
+  }
+
+  int _numOfRowInSection(index, settingsModel) {
+    var section = _SettingsSection.values[index];
+    switch (section) {
+      case _SettingsSection.HeadType: return 2;
+      case _SettingsSection.CustomTunings:
+        return settingsModel.customTunings.isEmpty ? 1 : settingsModel.customTunings.length;
+      case _SettingsSection.CommonTunings:
+        return settingsModel.builtinTunings.length;
+      default: return 0;
+    }
+  }
+
+  Widget _headerInSection(context, index) {
+    var theme = Theme.of(context);
+    var titleCt = Container(
+      padding: EdgeInsets.fromLTRB(20, 14, 20, 5),
+      child: Text(
+          _getSectionTitle(index),
+          style: theme.textTheme.caption
+      ),
+    );
+
+    if (index == 0) {
+      return titleCt;
+    }
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Container(
+            color: theme.dividerColor,
+            height: 0.5
+        ),
+        titleCt
+      ],
+    );
+  }
+
+  Widget _cellAtIndexPath(context, index, row, SettingsModel settingsModel) {
+    var theme = Theme.of(context);
+    var i18n = StringsLocalizations.of(context);
+    var section = _SettingsSection.values[index];
+    if (section == _SettingsSection.HeadType) {
+      var checkIconColor = settingsModel.guitarHead == row ? theme.primaryIconTheme.color : Colors.transparent;
+      return InkWell(
+        onTap: () {
+          settingsModel.setGuitarHead(row);
+        },
+        child: Container(
+          padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          child: Row(
+            children: <Widget>[
+              SizedBox(
+                width: 30,
+                child: Icon(Icons.check, color: checkIconColor),
+              ),
+              SizedBox(width: 20),
+              Expanded(
+                flex: 1,
+                child: Text(
+                  row == 0 ? i18n.acousticGuitar : i18n.electricGuitar
+                ),
+              )
+            ],
+          ),
+        ),
+      );
+    }
+
+    List<Tuning> tunings;
+    if (section == _SettingsSection.CustomTunings) {
+      tunings = settingsModel.customTunings;
+    } else {
+      tunings = settingsModel.builtinTunings;
+    }
+
+    if (section == _SettingsSection.CustomTunings && tunings.isEmpty) {
+      return Container(
+        padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+        child: Center(
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  width: 180,
+                  child: RaisedButton.icon(
+                    icon: Icon(Icons.add),
+                    onPressed: _onClickAddCustom,
+                    label: Text(i18n.add),
+                  ),
+                )
+              ],
+            )
+        ),
+      );
+    }
+
+    var tunerModel = Provider.of<TunerModel>(context, listen: false);
+    var tuning = tunings[row];
+    var selected = tuning.id == tunerModel.tuning.id;
+
+    return InkWell(
+      key: Key(tuning.id),
+      onTap: () {
+        settingsModel.selectTuning(tuning.id);
+      },
+      onLongPress: () {
+        if (section == _SettingsSection.CustomTunings) {
+          _onLongPressTuning(settingsModel, tuning);
+        }
+      },
+      child: AnimatedContainer(
+        key: Key(tuning.id),
+        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        color: selected ? theme.selectedRowColor.withAlpha(0x11) : Colors.transparent,
+        duration: Duration(milliseconds: 200),
+        child: Row(
+          children: <Widget>[
+            SizedBox(
+              width: 30,
+              child: Icon(Icons.check, color: selected ? theme.primaryIconTheme.color : Colors.transparent),
+            ),
+            SizedBox(width: 20),
+            Expanded(
+              flex: 2,
+              child: Text(
+                  tuning.name,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontFamily: "LabelFont",
+                  )
+              ),
+            ),
+            Expanded(
+              flex: 3,
+              child: Text(
+                  tuning.notes.join(" "),
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: "NoteFont"
+                  )
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
 
   _onClickAddCustom() async {
     var route = MaterialPageRoute<Tuning>(builder: (context) => TuningPage());
@@ -68,128 +240,16 @@ class _SettingsPageState extends State<SettingsPage> {
       body: SafeArea(
         child: Consumer<SettingsModel>(
           builder: (context, settingsModel, child) {
-            var tunerModel = Provider.of<TunerModel>(context, listen: false);
             return SectionTableView(
-              sectionCount: 2,
-              numOfRowInSection: (section) {
-                if (section == 0 && settingsModel.customTunings.isEmpty) {
-                  return 1;
-                }
-                return section == 0 ?
-                  settingsModel.customTunings.length :
-                  settingsModel.builtinTunings.length;
+              sectionCount: _SettingsSection.values.length,
+              numOfRowInSection: (sectionIdx) {
+                return _numOfRowInSection(sectionIdx, settingsModel);
               },
               cellAtIndexPath: (section, row) {
-                List<Tuning> tunings;
-                if (section == 0) {
-                  tunings = settingsModel.customTunings;
-                } else {
-                  tunings = settingsModel.builtinTunings;
-                }
-
-                if (section == 0 && tunings.isEmpty) {
-                  return Container(
-                    padding: EdgeInsets.fromLTRB(20, 20, 20, 60),
-                    child: Center(
-                      child: Column(
-                        children: <Widget>[
-                          Icon(
-                            Icons.add_alert,
-                            size: 50,
-                          ),
-                          SizedBox(height: 20),
-                          Text(
-                            i18n.noCustomTunings,
-                            style: theme.textTheme.caption,
-                          ),
-                          SizedBox(height: 20),
-                          SizedBox(
-                            width: 200,
-                            child: RaisedButton(
-                              onPressed: _onClickAddCustom,
-                              child: Text(i18n.add),
-                            ),
-                          )
-                        ],
-                      )
-                    ),
-                  );
-                }
-
-                var tuning = tunings[row];
-                var selected = tuning.id == tunerModel.tuning.id;
-
-                return InkWell(
-                  key: Key(tuning.id),
-                  onTap: () {
-                    settingsModel.selectTuning(tuning.id);
-                  },
-                  onLongPress: () {
-                    if (section == 0) {
-                      _onLongPressTuning(settingsModel, tuning);
-                    }
-                  },
-                  child: AnimatedContainer(
-                    key: Key(tuning.id),
-                    padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-                    color: selected ? theme.selectedRowColor.withAlpha(0x11) : Colors.transparent,
-                    duration: Duration(milliseconds: 200),
-                    child: Row(
-                      children: <Widget>[
-                        SizedBox(
-                          width: 30,
-                          child: Icon(Icons.check, color: selected ? theme.primaryIconTheme.color : Colors.transparent),
-                        ),
-                        SizedBox(width: 20),
-                        Expanded(
-                          flex: 2,
-                          child: Text(
-                            tuning.name,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: "LabelFont",
-                            )
-                          ),
-                        ),
-                        Expanded(
-                          flex: 3,
-                          child: Text(
-                            tuning.notes.join(" "),
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontFamily: "NoteFont"
-                            )
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
+                return _cellAtIndexPath(context, section, row, settingsModel);
               },
               headerInSection: (section) {
-                var titleCt = Container(
-                  padding: EdgeInsets.all(20),
-                  child: Text(
-                      section == 0 ? i18n.customTunings : i18n.commonTunings,
-                      style: theme.textTheme.caption
-                  ),
-                );
-
-                if (section == 0) {
-                  return titleCt;
-                }
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(height: 20,),
-                    Container(
-                      color: theme.dividerColor,
-                      height: 0.5
-                    ),
-                    titleCt
-                  ],
-                );
+                return _headerInSection(context, section);
               },
               divider: Container(
                 color: theme.dividerColor,

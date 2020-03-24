@@ -23,6 +23,7 @@ class TunerModel extends ChangeNotifier {
   bool get loading => _loading;
   bool get auto => _auto;
   int get string => _string;
+  int get guitarHead => _settingsModel.guitarHead;
   Tuning get tuning => _settingsModel.tuning;
   Map<String, Note> get noteMap => _noteMap;
   Note get selectedNote => noteMap[tuning.notes[string]];

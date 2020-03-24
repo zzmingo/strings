@@ -21,6 +21,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "acousticGuitar" : MessageLookupByLibrary.simpleMessage("原声吉他"),
     "add" : MessageLookupByLibrary.simpleMessage("添加"),
     "addCustomTuning" : MessageLookupByLibrary.simpleMessage("自定义调弦"),
     "auto" : MessageLookupByLibrary.simpleMessage("自动"),
@@ -33,8 +34,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "customTunings" : MessageLookupByLibrary.simpleMessage("自定义调弦"),
     "customTuningsWithTips" : MessageLookupByLibrary.simpleMessage("自定义调弦 (长按可删除)"),
     "delete" : MessageLookupByLibrary.simpleMessage("删除"),
+    "electricGuitar" : MessageLookupByLibrary.simpleMessage("电吉他"),
     "errorTipsStringsEmpty" : MessageLookupByLibrary.simpleMessage("请选择一个调弦"),
     "errorTipsTuningName" : MessageLookupByLibrary.simpleMessage("名称不能为空"),
+    "guitarHead" : MessageLookupByLibrary.simpleMessage("琴头"),
     "nameForTuning" : MessageLookupByLibrary.simpleMessage(""),
     "noCustomTunings" : MessageLookupByLibrary.simpleMessage("没有自定义调弦"),
     "noticeTitle" : MessageLookupByLibrary.simpleMessage("提示"),

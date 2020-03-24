@@ -130,5 +130,20 @@
   "@autoImageHName": {
     "type": "text",
     "placeholders": {}
+  },
+  "guitarHead": "琴头",
+  "@guitarHead": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "acousticGuitar": "原声吉他",
+  "@acousticGuitar": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "electricGuitar": "电吉他",
+  "@electricGuitar": {
+    "type": "text",
+    "placeholders": {}
   }
 }

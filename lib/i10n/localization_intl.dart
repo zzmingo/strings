@@ -41,7 +41,9 @@ class StringsLocalizations {
   String get errorTipsStringsEmpty => Intl.message("Please select strings.", name: "errorTipsStringsEmpty");
   String get autoImageName => Intl.message("auto-en", name: "autoImageName");
   String get autoImageHName => Intl.message("auto-h-en", name: "autoImageHName");
-
+  String get guitarHead => Intl.message("Deghead", name: "guitarHead");
+  String get acousticGuitar => Intl.message("Acoustic guitar", name: "acousticGuitar");
+  String get electricGuitar => Intl.message("Electric Guitar", name: "electricGuitar");
 
 }
 
