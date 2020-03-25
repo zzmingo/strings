@@ -18,7 +18,6 @@ import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugins.GeneratedPluginRegistrant
 import io.flutter.embedding.android.DrawableSplashScreen
-import mingo.strings.R
 
 
 class MainActivity: FlutterActivity(), PitchDetectionHandler, EventChannel.StreamHandler {
@@ -65,6 +64,7 @@ class MainActivity: FlutterActivity(), PitchDetectionHandler, EventChannel.Strea
             val rms = event.rms * 100
             val map = mutableMapOf<String, Float>()
             map["pitch"] = pitch
+            map["pitched"] = if (result.isPitched) 1.0f else 0f
             map["probability"] = probability
             map["rms"] = rms.toFloat()
             map["timestamp"] = event.timeStamp.toFloat()
@@ -96,7 +96,7 @@ class MainActivity: FlutterActivity(), PitchDetectionHandler, EventChannel.Strea
         val overlap = 0
         dispatcher?.stop()
         dispatcher = AudioDispatcherFactory.fromDefaultMicrophone(sampleRate, bufferSize, overlap)
-        dispatcher?.addAudioProcessor(PitchProcessor(PitchProcessor.PitchEstimationAlgorithm.YIN, sampleRate.toFloat(), bufferSize, this))
+        dispatcher?.addAudioProcessor(PitchProcessor(PitchProcessor.PitchEstimationAlgorithm.MPM, sampleRate.toFloat(), bufferSize, this))
 //        dispatcher?.addAudioProcessor(PitchProcessor(PitchEstimationAlgorithm.MPM, sampleRate.toFloat(), bufferSize, this))
         Thread(dispatcher).start()
     }

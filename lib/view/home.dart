@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_picker/flutter_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:strings/i10n/localization_intl.dart';
 import 'package:strings/model/tuner.dart';
@@ -70,6 +71,44 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     this._tuner.stop();
     await Navigator.push(context, route);
     this._tuner.start();
+  }
+
+  void _toSelectCapo() async {
+    var theme = Theme.of(context);
+    var tunerModel = Provider.of<TunerModel>(context, listen: false);
+    bool confirmed = false;
+    Picker picker;
+    picker = new Picker(
+      adapter: NumberPickerAdapter(data: [
+        NumberPickerColumn(begin: 0, end: 12),
+      ]),
+      cancel: IconButton(icon: Icon(Icons.close), onPressed: () {
+        picker.doCancel(context);
+      },),
+      confirm: IconButton(icon: Icon(Icons.check), onPressed: () {
+        confirmed = true;
+        picker.doConfirm(context);
+      },),
+      title: Text("Capo"),
+      height: 300,
+      itemExtent: 50,
+      selecteds: [tunerModel.capo],
+      changeToFirst: false,
+      textAlign: TextAlign.left,
+      columnPadding: const EdgeInsets.all(4.0),
+      backgroundColor: theme.canvasColor,
+      containerColor: theme.canvasColor,
+      headercolor: theme.canvasColor,
+      textStyle: TextStyle(fontSize: 24, fontFamily: "LabelFont"),
+      selectedTextStyle: TextStyle(color: theme.accentColor, fontSize: 24, fontFamily: "LabelFont"),
+      onConfirm: (Picker picker, List value) {
+        confirmed = true;
+      },
+    );
+    await picker.showModal(context);
+    if (confirmed) {
+      tunerModel.setCapo(picker.getSelectedValues()[0]);
+    }
   }
 
   @override
@@ -232,42 +271,68 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
             child: Stack(
               children: <Widget>[
                 _getNoteCircleLayout(context),
-                Align(
-                  alignment: Alignment(-0.8, 0.8),
-                  child: SizedBox(
-                    height: Sizes.width(62),
-                    child: OutlineButton(
-                      padding: EdgeInsets.all(0),
-                      child: Consumer<TunerModel>(
-                        builder: (context, tunerModel, child) {
-                          return Text(tunerModel.tuning.name,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: "LabelFont",
-                            )
-                          );
-                        },
+                Positioned(
+                  left: Sizes.width(40),
+                  bottom: Sizes.width(50),
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: Sizes.width(62),
+                        child: OutlineButton(
+                          padding: EdgeInsets.all(0),
+                          child: Consumer<TunerModel>(
+                            builder: (context, tunerModel, child) {
+                              return Text(tunerModel.tuning.name,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: "LabelFont",
+                                  )
+                              );
+                            },
+                          ),
+                          onPressed: _toSettingsPage,
+                        ),
                       ),
-                      onPressed: _toSettingsPage,
-                    ),
+                      SizedBox(height: Sizes.width(20)),
+                      SizedBox(
+                        height: Sizes.width(62),
+                        child: OutlineButton(
+                          padding: EdgeInsets.all(0),
+                          child: Consumer<TunerModel>(
+                            builder: (context, tunerModel, child) {
+                              return Text("Capo: ${tunerModel.capo}",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: "LabelFont",
+                                  )
+                              );
+                            },
+                          ),
+                          onPressed: () {
+                            _toSelectCapo();
+                          },
+                        ),
+                      )
+                    ],
                   ),
                 ),
-                Align(
-                    alignment: Alignment(0.8, 0.8),
-                    child: Consumer<TunerModel>(
-                      builder: (context, tuner, child) {
-                        return GestureDetector(
-                          onTap: () {
-                            tuner.toggleAuto();
-                          },
-                          child: Image.asset(
-                            tuner.auto ? "assets/${i18n.autoImageHName}.png" : "assets/${i18n.autoImageName}.png",
-                            width: Sizes.width(142),
-                            height: Sizes.width(62),
-                          ),
-                        );
-                      },
-                    )
+                Positioned(
+                  right: Sizes.width(40),
+                  bottom: Sizes.width(50),
+                  child: Consumer<TunerModel>(
+                    builder: (context, tuner, child) {
+                      return GestureDetector(
+                        onTap: () {
+                          tuner.toggleAuto();
+                        },
+                        child: Image.asset(
+                          tuner.auto ? "assets/${i18n.autoImageHName}.png" : "assets/${i18n.autoImageName}.png",
+                          width: Sizes.width(142),
+                          height: Sizes.width(62),
+                        ),
+                      );
+                    },
+                  )
                 )
               ],
             )
@@ -384,7 +449,4 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     );
   }
 
-  Widget _getAutoButton(BuildContext context) {
-
-  }
 }

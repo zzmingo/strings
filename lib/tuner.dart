@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/scheduler.dart';
@@ -6,6 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:strings/model/tuner.dart';
 
+
+double _NOTE_FACTOR = pow(2, 1/12);
 
 typedef PitchCallback = void Function(double pitch, double targetPitch);
 
@@ -68,7 +71,8 @@ class Tuner {
       }
     }
 
-    var targetPitch = tunerModel.selectedNote.pitch;
+    var capoPitch = tunerModel.selectedNote.pitch * pow(_NOTE_FACTOR, tunerModel.capo);
+    var targetPitch = capoPitch;
     _pitchCallback(acceptResult.avgPitch, targetPitch);
   }
 
@@ -148,6 +152,7 @@ class PitchHelper {
     matches = 0;
     continuousRms = 0;
     continuousString = 0;
+    continuousPitch = 0;
     lastTs = 0;
     lastRms = 0;
     lastString = -1;
@@ -157,12 +162,14 @@ class PitchHelper {
 
   PitchAcceptResult acceptPitch(result, TunerModel tunerModel) {
     bool accept = true;
+    bool pitched = result["pitched"] > 0;
     double pitch = (result["pitch"] * 1000).ceil() / 1000.0;
     int prob = (result["probability"] * 100).ceil();
     int rms = (result["rms"] * 1000).ceil();
     int ts = (result["timestamp"] * 1000).ceil();
     int string = tunerModel.string;
     var hasResonance = false;
+    var multiple = 1.0;
     var reason = PitchRejectReason.SUCCESSFUL;
 
     if (lastTs <= 0) {
@@ -198,7 +205,7 @@ class PitchHelper {
       }
 
       // ts连续性, > 500ms 不连续
-      if (deltaTs > 400) {
+      if (deltaTs > 1000) {
         reset();
         accept = false;
         reason = PitchRejectReason.TS_TOO_LARGE;
@@ -206,7 +213,7 @@ class PitchHelper {
       }
 
       // 声音响度连续性
-      if (rms < 50) {
+      if (rms < -10203012) {
         accept = false;
         reason = PitchRejectReason.RMS_TOO_SMALL;
         break;
@@ -227,12 +234,16 @@ class PitchHelper {
 
 
       // 对比历史pitch
+      // 低频共振现象
       var lastPitchDelta = (pitch - lastPitch).abs();
-      if (lastPitchDelta > 5) {
+      if (lastPitchDelta > 20) {
         var lastAcceptPitchDelta = (lastAcceptPitch - pitch).abs();
-
-        // 低频共振现象
-        if (continuousPitch >= 5 && (lastAcceptPitchDelta - pitch).abs() < 3) {
+        if (lastAcceptPitch > pitch) {
+          multiple = lastAcceptPitch / pitch;
+        } else {
+          multiple = pitch / lastAcceptPitch;
+        }
+        if (continuousPitch >= 2 && (multiple - 2.0).abs() <= 0.03) {
           hasResonance = true;
           pitch = lastAcceptPitch;
         }
@@ -252,7 +263,10 @@ class PitchHelper {
         lastString = tunerModel.string;
       }
 
-      string = _getNearestString(tunerModel, pitch);
+      var nearestString = _getNearestString(tunerModel, pitch);
+      if (nearestString != -1) {
+        string = nearestString;
+      }
 
       // 和当前选的string不对
       if (string != tunerModel.string) {
@@ -298,7 +312,7 @@ class PitchHelper {
     _result.matches = matches;
 
 
-    debugPrint("pitch $count [${accept ? "Y" : "N"}] $pitch[${hasResonance ? "2" : "1"}] ($prob%) matches=$matches rms=$rms($deltaRms) t=$ts($deltaTs) $reason");
+    debugPrint("pitch $count [${accept ? "Y" : "N"}] $pitch[$continuousPitch, ${hasResonance ? "2" : "1"}, ${(multiple - 2.0).abs()}] ($prob%) matches=$matches pitched=$pitched rms=$rms($deltaRms) t=$ts($deltaTs) $reason");
 
     lastTs = ts;
     lastRms = rms;
@@ -313,13 +327,17 @@ class PitchHelper {
     var index = 0;
     tunerModel.tuning.notes.forEach((item) {
       var stringPitch = tunerModel.noteMap[item].pitch;
-      var delta = (stringPitch - pitch).abs();
+      var capoPitch = stringPitch * pow(_NOTE_FACTOR, tunerModel.capo);
+      var delta = (capoPitch - pitch).abs();
       if (delta < pitchDelta) {
         found = index;
         pitchDelta = delta;
       }
       index ++;
     });
+    if (pitchDelta >= 5) {
+      return -1;
+    }
     return found;
   }
 

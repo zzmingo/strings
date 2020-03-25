@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:strings/model/common.dart';
 import 'package:strings/model/settings.dart';
+
+
+const String _CAPO_KEY = "mingo.strings.tuner.capo";
 
 class TunerModel extends ChangeNotifier {
 
@@ -12,6 +14,7 @@ class TunerModel extends ChangeNotifier {
 
   bool _auto = true;
   int _string = 5;
+  int _capo = 0;
 
 
   Map<String, Note> _noteMap;
@@ -23,6 +26,7 @@ class TunerModel extends ChangeNotifier {
   bool get loading => _loading;
   bool get auto => _auto;
   int get string => _string;
+  int get capo => _capo;
   int get guitarHead => _settingsModel.guitarHead;
   Tuning get tuning => _settingsModel.tuning;
   Map<String, Note> get noteMap => _noteMap;
@@ -38,8 +42,6 @@ class TunerModel extends ChangeNotifier {
       _noteMap[key] = Note.fromJson(value);
     });
 
-    var prefs = await SharedPreferences.getInstance();
-
     _loading = false;
     notifyListeners();
   }
@@ -51,6 +53,11 @@ class TunerModel extends ChangeNotifier {
 
   void selectString(int string) {
     this._string = string;
+    notifyListeners();
+  }
+
+  void setCapo(int capo) {
+    _capo = capo;
     notifyListeners();
   }
 

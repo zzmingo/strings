@@ -34,7 +34,7 @@ class SettingsModel extends ChangeNotifier {
     tuning = Tuning();
     tuning.id = "strings.builtin.tuning.openD";
     tuning.name = "Open D";
-    tuning.notes = "D2 A2 #F3 D3 A3 D4".split(" ").toList();
+    tuning.notes = "D2 A2 D3 #F3 A3 D4".split(" ").toList();
     _builtinTunings.add(tuning);
 
     _customTunings = List<Tuning>();

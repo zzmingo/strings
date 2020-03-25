@@ -95,12 +95,19 @@ class _SettingsPageState extends State<SettingsPage> {
                 child: Icon(Icons.check, color: checkIconColor),
               ),
               SizedBox(width: 20),
+              SizedBox(
+                width: 30,
+                child: ImageIcon(
+                  AssetImage(row == 0 ? "assets/jita.png" : "assets/dianjita.png"),
+                ),
+              ),
+              SizedBox(width: 10),
               Expanded(
                 flex: 1,
                 child: Text(
                   row == 0 ? i18n.acousticGuitar : i18n.electricGuitar
                 ),
-              )
+              ),
             ],
           ),
         ),
