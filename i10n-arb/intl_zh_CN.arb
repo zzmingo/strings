@@ -160,5 +160,10 @@
   "@CAGEDSystem": {
     "type": "text",
     "placeholders": {}
+  },
+  "home": "导航",
+  "@home": {
+    "type": "text",
+    "placeholders": {}
   }
 }

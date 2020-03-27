@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    _page = _Page.Tuner;
+    _page = _Page.Home;
   }
 
   IconData _getMenuIcon(_Page page) {
@@ -67,7 +67,10 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
         child: _buildDrawerBody(context),
       ),
       appBar: AppBar(
-        title: Text(_getPageTitle(_page, false), style: TextStyle(fontFamily: "LogoFont")),
+        title: Text(
+          _getPageTitle(_page, false),
+          style: TextStyle(fontFamily: _page == _Page.Home ? "LogoFont" : "LabelFont"),
+        ),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
@@ -92,8 +95,39 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   }
 
   Widget _buildHomePage(BuildContext context) {
+    var theme = Theme.of(context);
+    var children = List<Widget>();
+    _Page.values.forEach((page) {
+      if (page == _Page.Home) {
+        return;
+      }
+      children.add(InkWell(
+        onTap: () {
+          _switchPage(page);
+        },
+        child: Container(
+          color: theme.cardColor,
+          child: Column(
+            children: <Widget>[
+              Expanded(flex: 3, child: Container(),),
+              Icon(_getMenuIcon(page), size: 38,),
+              Expanded(flex: 1, child: Container(),),
+              Text(_getPageTitle(page, false)),
+              Expanded(flex: 3, child: Container(),),
+            ],
+          ),
+        ),
+      ));
+    });
     return Container(
-
+      child: GridView.count(
+        crossAxisCount: 2,
+        childAspectRatio: 1,
+        children: children,
+        padding: EdgeInsets.all(20),
+        mainAxisSpacing: 20,
+        crossAxisSpacing: 20,
+      ),
     );
   }
 

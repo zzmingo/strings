@@ -41,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "errorTipsStringsEmpty" : MessageLookupByLibrary.simpleMessage("请选择一个调弦"),
     "errorTipsTuningName" : MessageLookupByLibrary.simpleMessage("名称不能为空"),
     "guitarHead" : MessageLookupByLibrary.simpleMessage("琴头"),
+    "home" : MessageLookupByLibrary.simpleMessage("导航"),
     "meter" : MessageLookupByLibrary.simpleMessage("拍子"),
     "metronome" : MessageLookupByLibrary.simpleMessage("节拍器"),
     "nameForTuning" : MessageLookupByLibrary.simpleMessage(""),

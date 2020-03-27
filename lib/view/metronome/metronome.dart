@@ -38,6 +38,14 @@ class _MetronomePageState extends State<MetronomePage> {
 //    beatingId = GlobalData.userSettings.beatingId;
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    if (_timer != null) {
+      _timer.cancel();
+    }
+  }
+
   void _startOrStop() async {
     if (_working) {
       return;
