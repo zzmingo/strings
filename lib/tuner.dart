@@ -26,6 +26,11 @@ class Tuner {
     _pitchHelper = PitchHelper(idleCallback);
   }
 
+  void dispose() {
+    stop();
+    _pitchHelper.dispose();
+  }
+
   void start() {
     if (_pitchSub == null) {
       _pitchSub = pitchStream.receiveBroadcastStream().listen(_onNativePitch);
@@ -117,16 +122,17 @@ class PitchHelper {
 
   int lastTimerTime = 0;
   bool updating = false;
-  VoidCallback idleCallback;
+  VoidCallback _idleCallback;
 
   PitchHelper(VoidCallback idleCallback) {
-    this.idleCallback = idleCallback;
+    _idleCallback = idleCallback;
     _result = PitchAcceptResult();
     _timer = Timer.periodic(Duration(milliseconds: 100), this._onTimerRun);
   }
 
   void dispose() {
     _timer.cancel();
+    _idleCallback = null;
   }
 
   _onTimerRun(_) {
@@ -135,8 +141,8 @@ class PitchHelper {
       if (updating) {
         updating = false;
         reset();
-        if (idleCallback != null) {
-          idleCallback();
+        if (_idleCallback != null) {
+          _idleCallback();
         }
       }
     } else {

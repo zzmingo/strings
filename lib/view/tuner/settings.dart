@@ -6,7 +6,7 @@ import 'package:strings/i10n/localization_intl.dart';
 import 'package:strings/model/common.dart';
 import 'package:strings/model/settings.dart';
 import 'package:strings/model/tuner.dart';
-import 'package:strings/view/tuning.dart';
+import 'package:strings/view/tuner/tuning.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -52,28 +52,58 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget _headerInSection(context, index) {
     var theme = Theme.of(context);
-    var titleCt = Container(
-      padding: EdgeInsets.fromLTRB(20, 14, 20, 5),
-      child: Text(
-          _getSectionTitle(index),
-          style: theme.textTheme.caption
-      ),
+    var titleText = Text(
+      _getSectionTitle(index),
+      style: theme.textTheme.caption
     );
-
-    if (index == 0) {
-      return titleCt;
+    var titlePadding = EdgeInsets.fromLTRB(20, 14, 20, 10);
+    var section = _SettingsSection.values[index];
+    switch (section) {
+      case _SettingsSection.HeadType:
+        return Container(
+          padding: titlePadding,
+          child: titleText,
+        );
+      case _SettingsSection.CustomTunings:
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+                color: theme.dividerColor,
+                height: 0.5
+            ),
+            Container(
+              padding: titlePadding,
+              child: Row(
+                children: <Widget>[
+                  titleText,
+                  Expanded(flex: 1, child: Container()),
+                  InkWell(
+                    onTap: _onClickAddCustom,
+                    child: Icon(Icons.add),
+                  )
+                ],
+              ),
+            )
+          ],
+        );
+      default:
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+                color: theme.dividerColor,
+                height: 0.5
+            ),
+            Container(
+              padding: titlePadding,
+              child: titleText,
+            )
+          ],
+        );
     }
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Container(
-            color: theme.dividerColor,
-            height: 0.5
-        ),
-        titleCt
-      ],
-    );
   }
 
   Widget _cellAtIndexPath(context, index, row, SettingsModel settingsModel) {
@@ -237,12 +267,6 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(i18n.tunerSettings),
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.add),
-              onPressed: _onClickAddCustom
-          ),
-        ],
       ),
       body: SafeArea(
         child: Consumer<SettingsModel>(

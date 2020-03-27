@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:strings/i10n/localization_intl.dart';
 import 'package:strings/model/settings.dart';
 import 'package:strings/model/tuner.dart';
+import 'package:strings/utils.dart';
 import 'package:strings/view/home.dart';
 
 void main() async {

@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-03-24T11:49:15.956846",
+  "@@last_modified": "2020-03-27T11:50:38.374978",
   "appName": "Strings",
   "@appName": {
     "type": "text",
@@ -132,6 +132,41 @@
   },
   "electricGuitar": "Electric Guitar",
   "@electricGuitar": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "share": "Share",
+  "@share": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "appreciate": "Appreciate",
+  "@appreciate": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "metronome": "Metronome",
+  "@metronome": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "CAGEDSystem": "CAGED System",
+  "@CAGEDSystem": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "bpm": "BPM",
+  "@bpm": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "meter": "Meter",
+  "@meter": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "home": "Home",
+  "@home": {
     "type": "text",
     "placeholders": {}
   }

@@ -6,11 +6,6 @@
     "type": "text",
     "placeholders": {}
   },
-  "metronome": "节拍器",
-  "@metronome": {
-    "type": "text",
-    "placeholders": {}
-  },
   "auto": "自动",
   "@auto": {
     "type": "text",
@@ -143,6 +138,26 @@
   },
   "electricGuitar": "电吉他",
   "@electricGuitar": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "share": "分享给朋友",
+  "@share": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "appreciate": "赞赏作者",
+  "@appreciate": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "metronome": "节拍器",
+  "@metronome": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "CAGEDSystem": "CAGED 系统",
+  "@CAGEDSystem": {
     "type": "text",
     "placeholders": {}
   }

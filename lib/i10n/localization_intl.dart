@@ -44,6 +44,13 @@ class StringsLocalizations {
   String get guitarHead => Intl.message("Deghead", name: "guitarHead");
   String get acousticGuitar => Intl.message("Acoustic guitar", name: "acousticGuitar");
   String get electricGuitar => Intl.message("Electric Guitar", name: "electricGuitar");
+  String get share => Intl.message("Share", name: "share");
+  String get appreciate => Intl.message("Appreciate", name: "appreciate");
+  String get metronome => Intl.message("Metronome", name: "metronome");
+  String get CAGEDSystem => Intl.message("CAGED System", name: "CAGEDSystem");
+  String get bpm => Intl.message("BPM", name: "bpm");
+  String get meter => Intl.message("Meter", name: "meter");
+  String get home => Intl.message("Home", name: "home");
 
 }
 
