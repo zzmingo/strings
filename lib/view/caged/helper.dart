@@ -13,6 +13,15 @@ enum MusicMode {
 }
 
 class Helper {
+
+  static List<int> getFretXList() {
+    return [50, 220, 410, 586, 754, 910, 1066, 1208, 1346, 1472, 1600, 1710, 1820, 1920, 2008, 2100, 2180, 2262];
+  }
+
+  static List<int> getStringYList() {
+    return [446, 498, 548, 600, 650, 700];
+  }
+
   static String getKeyModeLabel(KeyMode keyMode) {
     switch (keyMode) {
       case KeyMode.Major: return "Major";
@@ -36,9 +45,9 @@ class Helper {
       case MusicMode.Bb: return "B♭";
       case MusicMode.Eb: return "E♭";
       case MusicMode.Ab: return "A♭";
-      case MusicMode.Db: return "D♭";
-      case MusicMode.Gb: return "G♭";
-      case MusicMode.B: return "B♭";
+      case MusicMode.Db: return "D♭ C♯";
+      case MusicMode.Gb: return "G♭ F♯";
+      case MusicMode.B: return "C♭ B";
       case MusicMode.E: return "E";
       case MusicMode.A: return "A";
       case MusicMode.D: return "D";
@@ -54,11 +63,11 @@ class Helper {
       case MusicMode.Bb: return "g";
       case MusicMode.Eb: return "c";
       case MusicMode.Ab: return "f";
-      case MusicMode.Db: return "b♭";
-      case MusicMode.Gb: return "e♭";
-      case MusicMode.B: return "a♭";
-      case MusicMode.E: return "c#";
-      case MusicMode.A: return "f#";
+      case MusicMode.Db: return "b♭ a♯";
+      case MusicMode.Gb: return "e♭ d♯";
+      case MusicMode.B: return "a♭ g♯";
+      case MusicMode.E: return "c♯";
+      case MusicMode.A: return "f♯";
       case MusicMode.D: return "b";
       case MusicMode.G: return "e";
       default: return null;

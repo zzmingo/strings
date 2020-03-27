@@ -4,6 +4,7 @@ import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:strings/utils.dart';
+import 'package:strings/utils/debounce.dart';
 
 import 'helper.dart';
 
@@ -27,29 +28,35 @@ class _FifthsCircleState extends State<FifthsCircle> {
 
   FifthsCircleCallback _callback;
 
-  List<Series<CirclePart, int>> minorCircleData = [
-    Series<CirclePart, int>(
-      id: "FifthsCircle",
-      domainFn: (part, _) => part.mode.index,
-      measureFn: (part, _) => 1,
-      labelAccessorFn: (part, _) => Helper.getMinorLabel(part.mode),
-      data: MusicMode.values.reversed.map((mode) {
-        return CirclePart(mode);
-      }).toList(),
-    ),
-  ];
+  final _debounce = Debounce(milliseconds: 0);
 
-  List<Series<CirclePart, int>> majorCircleData = [
-    Series<CirclePart, int>(
-      id: "FifthsCircle",
-      domainFn: (part, _) => part.mode.index,
-      measureFn: (part, _) => 1,
-      labelAccessorFn: (part, _) => Helper.getMajorLabel(part.mode),
-      data: MusicMode.values.reversed.map((mode) {
-        return CirclePart(mode);
-      }).toList(),
-    ),
-  ];
+  List<Series<CirclePart, int>> _getMinorCircleData() {
+    return [
+      Series<CirclePart, int>(
+        id: "FifthsCircle",
+        domainFn: (part, _) => part.mode.index,
+        measureFn: (part, _) => 1,
+        labelAccessorFn: (part, _) => Helper.getMinorLabel(part.mode),
+        data: MusicMode.values.reversed.map((mode) {
+          return CirclePart(mode);
+        }).toList(),
+      ),
+    ];
+  }
+
+  List<Series<CirclePart, int>> _getMajorCircleData() {
+    return [
+      Series<CirclePart, int>(
+        id: "FifthsCircle",
+        domainFn: (part, _) => part.mode.index,
+        measureFn: (part, _) => 1,
+        labelAccessorFn: (part, _) => Helper.getMajorLabel(part.mode),
+        data: MusicMode.values.reversed.map((mode) {
+          return CirclePart(mode);
+        }).toList(),
+      ),
+    ];
+  }
 
   @override
   void initState() {
@@ -61,11 +68,11 @@ class _FifthsCircleState extends State<FifthsCircle> {
     var mode = Helper.getMusicModeByPointer(event.localPosition);
     var screenWHalf = Sizes.screenW / 2;
     pointer = Offset(pointer.dx - screenWHalf, pointer.dy - screenWHalf);
-    var keyMode = pointer.distance > Sizes.width(420) ? KeyMode.Major : KeyMode.Minor;
-    _callback(mode, keyMode);
+    var keyMode = pointer.distance > Sizes.width(420) / 2 ? KeyMode.Major : KeyMode.Minor;
+    _debounce.run(() {
+      _callback(mode, keyMode);
+    });
   }
-
-
 
   Color _getMajorFillColor(MusicMode mode) {
     return mode.index % 2 == 0 ? Color.fromHex(code: "#FFFFFF") : Color.fromHex(code: "#F1F1F1");
@@ -74,15 +81,15 @@ class _FifthsCircleState extends State<FifthsCircle> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    var innerSize = Sizes.width(420);
-    var outerSize = Sizes.width(214);
+    var innerSize = Sizes.width(450);
+    var outerSize = Sizes.width(184);
     var textColor = theme.primaryColorDark;
     var chartTextColor = Color(r: textColor.red, g: textColor.green, b: textColor.blue, a: textColor.alpha);
 
     return Listener(
       onPointerDown: _onPointerUpdate,
-      onPointerUp: _onPointerUpdate,
       onPointerMove: _onPointerUpdate,
+      onPointerUp: _onPointerUpdate,
       child: Container(
           child: Stack(
             children: <Widget>[
@@ -92,22 +99,22 @@ class _FifthsCircleState extends State<FifthsCircle> {
               IgnorePointer(
                 key: Key("Major"),
                 child: PieChart(
-                    majorCircleData,
+                    _getMajorCircleData(),
                     animate: false,
                     defaultRenderer: ArcRendererConfig(
-                      arcWidth: (outerSize / 2).ceil(),
-                      startAngle: -pi / 2 + pi / 12,
-                      strokeWidthPx: 0,
-                      arcRendererDecorators: [
-                        ArcLabelDecorator(
-                          labelPosition: ArcLabelPosition.inside,
-                          insideLabelStyleSpec: TextStyleSpec(
-                            fontSize: 28,
-                            fontFamily: "NoteFont",
-                            color: chartTextColor,
+                        arcWidth: (outerSize / 2).ceil(),
+                        startAngle: -pi / 2 + pi / 12,
+                        strokeWidthPx: 0,
+                        arcRendererDecorators: [
+                          ArcLabelDecorator(
+                              labelPosition: ArcLabelPosition.inside,
+                              insideLabelStyleSpec: TextStyleSpec(
+                                fontSize: 22,
+                                fontFamily: "NoteFont",
+                                color: chartTextColor,
+                              )
                           )
-                        )
-                      ]
+                        ]
                     )
                 ),
               ),
@@ -119,7 +126,7 @@ class _FifthsCircleState extends State<FifthsCircle> {
                     width: innerSize,
                     height: innerSize,
                     child: PieChart(
-                        minorCircleData,
+                        _getMinorCircleData(),
                         animate: false,
                         defaultRenderer: ArcRendererConfig(
                             arcWidth: (innerSize / 4).ceil(),
@@ -129,11 +136,11 @@ class _FifthsCircleState extends State<FifthsCircle> {
                               ArcLabelDecorator(
                                   labelPosition: ArcLabelPosition.inside,
                                   insideLabelStyleSpec: TextStyleSpec(
-                                    fontSize: 28,
+                                    fontSize: 18,
                                     fontFamily: "NoteFont",
                                     color: chartTextColor,
                                   )
-                              )
+                              ),
                             ]
                         )
                     ),

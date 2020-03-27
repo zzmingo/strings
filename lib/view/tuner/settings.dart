@@ -6,6 +6,7 @@ import 'package:strings/i10n/localization_intl.dart';
 import 'package:strings/model/common.dart';
 import 'package:strings/model/settings.dart';
 import 'package:strings/model/tuner.dart';
+import 'package:strings/view/cells.dart';
 import 'package:strings/view/tuner/tuning.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -111,36 +112,28 @@ class _SettingsPageState extends State<SettingsPage> {
     var i18n = StringsLocalizations.of(context);
     var section = _SettingsSection.values[index];
     if (section == _SettingsSection.HeadType) {
-      var checkIconColor = settingsModel.guitarHead == row ? theme.primaryIconTheme.color : Colors.transparent;
-      return InkWell(
+      var selected = settingsModel.guitarHead == row;
+      return CellRow(
+        selectable: true,
+        selected: selected,
         onTap: () {
           settingsModel.setGuitarHead(row);
         },
-        child: Container(
-          padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          child: Row(
-            children: <Widget>[
-              SizedBox(
-                width: 30,
-                child: Icon(Icons.check, color: checkIconColor),
-              ),
-              SizedBox(width: 20),
-              SizedBox(
-                width: 30,
-                child: ImageIcon(
-                  AssetImage(row == 0 ? "assets/jita.png" : "assets/dianjita.png"),
-                ),
-              ),
-              SizedBox(width: 10),
-              Expanded(
-                flex: 1,
-                child: Text(
-                  row == 0 ? i18n.acousticGuitar : i18n.electricGuitar
-                ),
-              ),
-            ],
+        children: <Widget>[
+          SizedBox(
+            width: 30,
+            child: ImageIcon(
+              AssetImage(row == 0 ? "assets/jita.png" : "assets/dianjita.png"),
+            ),
           ),
-        ),
+          SizedBox(width: 10),
+          Expanded(
+            flex: 1,
+            child: Text(
+                row == 0 ? i18n.acousticGuitar : i18n.electricGuitar
+            ),
+          ),
+        ],
       );
     }
 
@@ -175,8 +168,10 @@ class _SettingsPageState extends State<SettingsPage> {
     var tuning = tunings[row];
     var selected = tuning.id == tunerModel.tuning.id;
 
-    return InkWell(
+    return CellRow(
       key: Key(tuning.id),
+      selectable: true,
+      selected: selected,
       onTap: () {
         settingsModel.selectTuning(tuning.id);
       },
@@ -185,41 +180,28 @@ class _SettingsPageState extends State<SettingsPage> {
           _onLongPressTuning(settingsModel, tuning);
         }
       },
-      child: AnimatedContainer(
-        key: Key(tuning.id),
-        padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        color: selected ? theme.selectedRowColor.withAlpha(0x11) : Colors.transparent,
-        duration: Duration(milliseconds: 200),
-        child: Row(
-          children: <Widget>[
-            SizedBox(
-              width: 30,
-              child: Icon(Icons.check, color: selected ? theme.primaryIconTheme.color : Colors.transparent),
-            ),
-            SizedBox(width: 20),
-            Expanded(
-              flex: 2,
-              child: Text(
-                  tuning.name,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontFamily: "LabelFont",
-                  )
-              ),
-            ),
-            Expanded(
-              flex: 3,
-              child: Text(
-                  tuning.notes.join(" "),
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: "NoteFont"
-                  )
-              ),
-            ),
-          ],
+      children: <Widget>[
+        Expanded(
+          flex: 2,
+          child: Text(
+              tuning.name,
+              style: TextStyle(
+                fontSize: 14,
+                fontFamily: "LabelFont",
+              )
+          ),
         ),
-      ),
+        Expanded(
+          flex: 3,
+          child: Text(
+              tuning.notes.join(" "),
+              style: TextStyle(
+                  fontSize: 18,
+                  fontFamily: "NoteFont"
+              )
+          ),
+        ),
+      ],
     );
   }
 
