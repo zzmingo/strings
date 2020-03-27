@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-03-27T12:31:39.812039",
+  "@@last_modified": "2020-03-27T13:37:38.187810",
   "appName": "Strings",
   "@appName": {
     "type": "text",
@@ -150,8 +150,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "CAGEDSystem": "CAGED System",
-  "@CAGEDSystem": {
+  "fretboard": "Fretboard",
+  "@fretboard": {
     "type": "text",
     "placeholders": {}
   },

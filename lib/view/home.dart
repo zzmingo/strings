@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     switch (page) {
       case _Page.Tuner: return i18n.tuner;
       case _Page.Metronome: return i18n.metronome;
-      case _Page.CAGEDSystem: return i18n.CAGEDSystem;
+      case _Page.CAGEDSystem: return i18n.fretboard;
       default: return drawer ? i18n.home : i18n.appName;
     }
   }

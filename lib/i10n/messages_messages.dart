@@ -21,7 +21,6 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
-    "CAGEDSystem" : MessageLookupByLibrary.simpleMessage("CAGED System"),
     "acousticGuitar" : MessageLookupByLibrary.simpleMessage("Acoustic guitar"),
     "add" : MessageLookupByLibrary.simpleMessage("Add"),
     "addCustomTuning" : MessageLookupByLibrary.simpleMessage("Add custom tuning"),
@@ -41,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "electricGuitar" : MessageLookupByLibrary.simpleMessage("Electric Guitar"),
     "errorTipsStringsEmpty" : MessageLookupByLibrary.simpleMessage("Please select strings."),
     "errorTipsTuningName" : MessageLookupByLibrary.simpleMessage("Name cannot be empty."),
+    "fretboard" : MessageLookupByLibrary.simpleMessage("Fretboard"),
     "guitarHead" : MessageLookupByLibrary.simpleMessage("Deghead"),
     "home" : MessageLookupByLibrary.simpleMessage("Home"),
     "meter" : MessageLookupByLibrary.simpleMessage("Meter"),

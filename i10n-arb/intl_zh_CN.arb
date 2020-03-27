@@ -156,8 +156,9 @@
     "type": "text",
     "placeholders": {}
   },
-  "CAGEDSystem": "CAGED 系统",
-  "@CAGEDSystem": {
+
+  "fretboard": "指板系统",
+  "@fretboard": {
     "type": "text",
     "placeholders": {}
   },
