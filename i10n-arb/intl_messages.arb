@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-03-27T13:37:38.187810",
+  "@@last_modified": "2020-03-28T14:52:24.217472",
   "appName": "Strings",
   "@appName": {
     "type": "text",
@@ -167,6 +167,16 @@
   },
   "home": "Home",
   "@home": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "fretboardNotes": "Fretboard Notes",
+  "@fretboardNotes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "chord": "Chord",
+  "@chord": {
     "type": "text",
     "placeholders": {}
   }

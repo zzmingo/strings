@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:strings/i10n/localization_intl.dart';
 import 'package:strings/view/caged/content_chord.dart';
 import 'package:strings/view/caged/content_fret_notes.dart';
 import 'package:strings/view/caged/fretboard.dart';
@@ -25,9 +26,10 @@ class _CagedPageState extends State<CagedPage> with SingleTickerProviderStateMix
   }
 
   String _getTabTitle(_Tab tab) {
+    var i18n = StringsLocalizations.of(context);
     switch (tab) {
-      case _Tab.FretNotes: return "Fretboard Notes";
-      case _Tab.Chord: return "Chord";
+      case _Tab.FretNotes: return i18n.fretboardNotes;
+      case _Tab.Chord: return i18n.chord;
       default: return null;
     }
   }

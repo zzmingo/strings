@@ -166,5 +166,15 @@
   "@home": {
     "type": "text",
     "placeholders": {}
+  },
+  "fretboardNotes": "指板音",
+  "@fretboardNotes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "chord": "和弦",
+  "@chord": {
+    "type": "text",
+    "placeholders": {}
   }
 }

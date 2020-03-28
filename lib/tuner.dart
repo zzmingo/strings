@@ -341,9 +341,6 @@ class PitchHelper {
       }
       index ++;
     });
-    if (pitchDelta >= 5) {
-      return -1;
-    }
     return found;
   }
 

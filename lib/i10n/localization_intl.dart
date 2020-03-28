@@ -51,7 +51,8 @@ class StringsLocalizations {
   String get bpm => Intl.message("BPM", name: "bpm");
   String get meter => Intl.message("Meter", name: "meter");
   String get home => Intl.message("Home", name: "home");
-
+  String get fretboardNotes => Intl.message("Fretboard Notes", name: "fretboardNotes");
+  String get chord => Intl.message("Chord", name: "chord");
 }
 
 class StringsLocalizationsDelegate extends LocalizationsDelegate<StringsLocalizations> {

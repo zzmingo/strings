@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:strings/utils.dart';
 import 'package:strings/utils/debounce.dart';
-
-import 'helper.dart';
+import 'package:strings/view/caged/helper.dart';
 
 
 typedef FifthsCircleCallback = void Function(MusicMode mode, KeyMode keyMode);
@@ -15,7 +14,7 @@ class FifthsCircle extends StatefulWidget {
 
   FifthsCircle(this._callback);
 
-  FifthsCircleCallback _callback;
+  final FifthsCircleCallback _callback;
 
 
   @override

@@ -32,7 +32,6 @@ class _ChordContentState extends State<ChordContent> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Column(
       children: <Widget>[
         Expanded(

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:strings/i10n/localization_intl.dart';
+import 'package:strings/model/fretboard.dart';
 import 'package:strings/model/settings.dart';
 import 'package:strings/model/tuner.dart';
-import 'package:strings/utils.dart';
 import 'package:strings/view/home.dart';
 
 void main() async {
@@ -17,6 +17,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (context) => settingsModel),
         ChangeNotifierProvider(create: (context) => tunerModel),
+        ChangeNotifierProvider(create: (context) => FretboardModel()),
       ],
         child: StringsApp(),
       )

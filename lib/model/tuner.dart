@@ -6,8 +6,6 @@ import 'package:strings/model/common.dart';
 import 'package:strings/model/settings.dart';
 
 
-const String _CAPO_KEY = "mingo.strings.tuner.capo";
-
 class TunerModel extends ChangeNotifier {
 
   bool _loading = true;
