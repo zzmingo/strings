@@ -82,7 +82,7 @@ class _FretboardState extends State<Fretboard> {
           image: AssetImage("assets/jita-fretboard2.png"),
         ));
         children.addAll([3, 5, 7, 9, 12, 15].map((pos) {
-          var note = Helper.getFretboardNode(pos, 5);
+          var note = FretboardHelper.getFretboardNode(pos, 5);
           return Positioned(
             left: note.x / imageW * Sizes.screenW - noteW / 2-4,
             top: note.y / imageH * containerH - noteH / 2 + 16,

@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:strings/i10n/localization_intl.dart';
 import 'package:strings/model/fretboard.dart';
 import 'package:strings/view/caged/helper.dart';
 import 'package:strings/view/cells.dart';
@@ -10,55 +10,92 @@ class FretNotesContent extends StatefulWidget {
   _FretNotesContentState createState() => _FretNotesContentState();
 }
 
-enum _Item {
-  AllFretboardNotes,
-}
-
 class _FretNotesContentState extends State<FretNotesContent> {
 
-  int _selectedItem = -1;
+  FretboardModel _fretboardModel;
+  var _rootMap = Map<FretboardType, String>();
 
-  String _getItemLabel(_Item item) {
-    switch (item) {
-      case _Item.AllFretboardNotes: return "全部音";
-      default: return null;
-    }
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _fretboardModel = Provider.of<FretboardModel>(context, listen: false);
   }
 
-  void _onItemClick(int index) {
-    var item = _Item.values[index];
-    var fretboardModel = Provider.of<FretboardModel>(context, listen: false);
-    switch (item) {
-      default:
-        setState(() {
-          _selectedItem = index;
-          var allNotes = Helper.getAllFretboardNotes();
-          fretboardModel.setFretboard(allNotes, null);
-        });
-    }
+  @override
+  void dispose() {
+    super.dispose();
+    _fretboardModel.setFretboard(FretboardType.Empty, notify: false );
   }
 
   @override
   Widget build(BuildContext context) {
-    var i18n = StringsLocalizations.of(context);
-    return ListView.builder(
-      itemCount: _Item.values.length,
-      itemBuilder: (context, index) {
-        return CellRow(
-          selectable: true,
-          selected: index == _selectedItem,
-          onTap: () {
-            _onItemClick(index);
-          },
-          children: <Widget>[
+    return Consumer<FretboardModel>(builder: (context, model, child) {
+      return ListView.builder(
+        itemCount: FretboardType.values.length - 1,
+        itemBuilder: (context, index) {
+          var children = <Widget>[
             SizedBox(width: 10),
-            Expanded(
-              flex: 1,
-              child: Text(_getItemLabel(_Item.values[index])),
-            ),
-          ],
-        );
-      }
-    );
+            Text(Helper.getFretboardTypeLabel(context, FretboardType.values[index+1])),
+            Expanded(flex: 1, child: Container()),
+          ];
+          var type = FretboardType.values[index+1];
+          if (type == FretboardType.AllFretboardNotes) {
+            return CellRow(
+              selectable: true,
+              selected: index == model.typeIndex - 1,
+              onTap: () {
+                model.setFretboard(type);
+              },
+              children: children,
+            );
+          }
+
+          var widget;
+          var isScale = type == FretboardType.RootNote ||
+              type == FretboardType.MajorScale ||
+              type == FretboardType.MinorScale ||
+              type == FretboardType.PentatonicScale;
+
+
+          if (isScale) {
+            var root = _rootMap[type];
+            var notes = FretboardHelper.getNoteSequence();
+            if (root == null) {
+              root = _rootMap[type] = notes[0];
+            }
+            children.add(PopupMenuButton<String>(
+              initialValue: root,
+              child: Row(
+                children: <Widget>[
+                  Text("根音: $root"),
+                  Icon(Icons.arrow_drop_down)
+                ],
+              ),
+              itemBuilder: (context) {
+                return notes.map((note) {
+                  return PopupMenuItem<String>(value: note, child: Text(note));
+                }).toList();
+              },
+              onSelected: (value) {
+                _rootMap[type] = value;
+                model.setFretboard(type, root: value);
+              },
+            ));
+            children.add(SizedBox(width: 20));
+
+            return CellRow(
+              selectable: true,
+              selected: index == model.typeIndex - 1,
+              onTap: () {
+                model.setFretboard(type, root: _rootMap[type]);
+              },
+              children: children,
+            );
+          }
+
+          return widget;
+        }
+      );
+    });
   }
 }
