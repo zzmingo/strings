@@ -42,7 +42,7 @@ abstract class BaseContentState<T extends StatefulWidget> extends State<T> {
             if (type == FretboardType.AllFretboardNotes) {
               return CellRow(
                 selectable: true,
-                selected: index == model.typeIndex - 1,
+                selected: index == getDisplayFretboardTypes().indexOf(model.type),
                 onTap: () {
                   model.setFretboard(type);
                 },

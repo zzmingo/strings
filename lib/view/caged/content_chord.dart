@@ -105,7 +105,7 @@ class _ChordContentState extends State<ChordContent> {
                       if (_popupItem == _PopupItem.Triads) {
                         type = _keyMode == KeyMode.Major ? FretboardType.MajorTriads : FretboardType.MinorTriads;
                       } else if (_popupItem == _PopupItem.SeventhChords) {
-                        type = _keyMode == KeyMode.Minor ? FretboardType.MinorTriads : FretboardType.MinorSeventhChords;
+                        type = _keyMode == KeyMode.Major ? FretboardType.MajorSeventhChords : FretboardType.MinorSeventhChords;
                       }
                       model.setFretboard(type, root: Helper.getNoteByMode(_musicMode));
                     },
