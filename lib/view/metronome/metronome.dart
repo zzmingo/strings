@@ -16,8 +16,12 @@ class MetronomePage extends StatefulWidget {
 class _MetronomePageState extends State<MetronomePage> {
 
   AudioCache _audioCache;
+  AudioPlayer _audioPlayer;
+  List<AudioPlayer> _audioPlayerList = List<AudioPlayer>();
+  int _playerIndex = 0;
 
   Timer _timer;
+  bool _preparing = false;
   bool _working = false;
   List<String> _meterList = ["1/4", "2/4", "3/4", "4/4", "3/8", "6/8"];
 
@@ -30,12 +34,10 @@ class _MetronomePageState extends State<MetronomePage> {
   @override
   void initState() {
     super.initState();
-    _audioCache = AudioCache(prefix: "");
-
-//    meter = GlobalData.userSettings.meter;
-//    bpm = GlobalData.userSettings.bpm;
-//    beatSound = GlobalData.userSettings.beatSound;
-//    beatingId = GlobalData.userSettings.beatingId;
+    for (var i=0; i<8; i++) {
+      _audioPlayerList.add(AudioPlayer(mode: PlayerMode.LOW_LATENCY));
+    }
+    _audioCache = AudioCache(prefix: "", fixedPlayer: _audioPlayer);
   }
 
   @override
@@ -47,24 +49,48 @@ class _MetronomePageState extends State<MetronomePage> {
   }
 
   void _startOrStop() async {
-    if (_working) {
+    if (_preparing) {
       return;
     }
-    _working = true;
+    _preparing = true;
     String sound = "$beatSound.mp3";
-    await _audioCache.load(sound);
+    var file = await _audioCache.load(sound);
+    if (!_preparing) {
+      return;
+    }
     if (_timer != null) {
       _timer.cancel();
       _timer = null;
+      _working = false;
     } else {
       int millis = (60 * 1000 / bpm).ceil();
       _timer = Timer.periodic(Duration(milliseconds: millis), (timer) {
-        _audioCache.play(sound, mode: PlayerMode.LOW_LATENCY);
+        if (!_working) {
+          return;
+        }
+        if (_playerIndex >= _audioPlayerList.length) {
+          _playerIndex = 0;
+        }
+        var player = _audioPlayerList[_playerIndex];
+        player.play(file.path);
+        debugPrint("play ${file.path}");
       });
     }
     setState(() {
+      _preparing = false;
+      _working = true;
+    });
+  }
+
+  void _stop() {
+    setState(() {
+      _preparing = false;
       _working = false;
     });
+    if (_timer != null) {
+      _timer.cancel();
+      _timer = null;
+    }
   }
 
   void _onMeterButtonTapped() {
@@ -94,9 +120,11 @@ class _MetronomePageState extends State<MetronomePage> {
         onConfirm: (Picker picker, List value) {
           setState(() {
             meter = picker.getSelectedValues()[0];
+            if (_working) {
+              _stop();
+              _startOrStop();
+            }
           });
-
-          // TODO
         }
     );
     picker.showDialog(context);
@@ -124,8 +152,11 @@ class _MetronomePageState extends State<MetronomePage> {
         onConfirm: (Picker picker, List value) {
           setState(() {
             bpm = picker.getSelectedValues()[0];
+            if (_working) {
+              _stop();
+              _startOrStop();
+            }
           });
-          // TODO
         }
     );
     picker.showDialog(context);

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:strings/i10n/localization_intl.dart';
+import 'package:strings/model/fretboard.dart';
 import 'package:strings/view/caged/content_chord.dart';
-import 'package:strings/view/caged/content_fret_notes.dart';
+import 'package:strings/view/caged/content_fretboard_notes.dart';
 import 'package:strings/view/caged/fretboard.dart';
 
 class CagedPage extends StatefulWidget {
@@ -23,6 +25,17 @@ class _CagedPageState extends State<CagedPage> with SingleTickerProviderStateMix
   void initState() {
     super.initState();
     _tabController = TabController(length: _Tab.values.length, vsync: this);
+    _tabController.addListener(_onTabChanged);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _tabController.removeListener(_onTabChanged);
+  }
+
+  void _onTabChanged() {
+    Provider.of<FretboardModel>(context, listen: false).setFretboard(FretboardType.Empty);
   }
 
   String _getTabTitle(_Tab tab) {
@@ -62,7 +75,7 @@ class _CagedPageState extends State<CagedPage> with SingleTickerProviderStateMix
         controller: _tabController,
         children: _Tab.values.map((tab) { //创建3个Tab页
           switch (tab) {
-            case _Tab.FretNotes: return FretNotesContent();
+            case _Tab.FretNotes: return FretboardNotesContent();
             case _Tab.Chord: return ChordContent();
             default: return null;
           }

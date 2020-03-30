@@ -33,6 +33,7 @@ class Helper {
 
   static String getFretboardTypeLabel(BuildContext context, FretboardType type) {
     switch (type) {
+      case FretboardType.Empty: return "未选择";
       case FretboardType.AllFretboardNotes: return "全部音";
       case FretboardType.RootNote: return "根音";
       case FretboardType.MajorScale: return "大调音阶";
@@ -40,6 +41,24 @@ class Helper {
       case FretboardType.PentatonicMajorScale: return "五声大调音阶";
       case FretboardType.PentatonicMinorScale: return "五声小调音阶";
       default: return "[未定义]";
+    }
+  }
+
+  static String getNoteByMode(MusicMode mode) {
+    switch (mode) {
+      case MusicMode.C: return "C";
+      case MusicMode.F: return "F";
+      case MusicMode.Bb: return "B♭";
+      case MusicMode.Eb: return "E♭";
+      case MusicMode.Ab: return "A♭";
+      case MusicMode.Db: return "D♭";
+      case MusicMode.Gb: return "G♭";
+      case MusicMode.B: return "B";
+      case MusicMode.E: return "E";
+      case MusicMode.A: return "A";
+      case MusicMode.D: return "D";
+      case MusicMode.G: return "G";
+      default: return null;
     }
   }
 

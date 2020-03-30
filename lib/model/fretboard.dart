@@ -19,6 +19,7 @@ class FretboardModel extends ChangeNotifier {
 
   List<FretboardNote> get primaryList => _primaryList;
   List<FretboardNote> get secondaryList => _secondaryList;
+  FretboardType get type => _type;
   int get typeIndex => FretboardType.values.indexOf(_type);
 
   void setFretboard(FretboardType type, {
@@ -68,7 +69,13 @@ class FretboardModel extends ChangeNotifier {
         }).toList();
         _secondaryList = null;
         break;
+      case FretboardType.MajorTriads:
+        if (root != null) {
+
+        }
+        break;
       default:
+        debugPrint("setFretboard $type, $root");
         break;
     }
 
@@ -94,6 +101,10 @@ enum FretboardType {
   MinorScale,
   PentatonicMajorScale,
   PentatonicMinorScale,
+  MajorTriads,
+  MinorTriads,
+  MajorSeventhChords,
+  MinorSeventhChords,
 }
 
 enum FretboardSubtype {
