@@ -34,6 +34,12 @@ class FretboardModel extends ChangeNotifier {
         _primaryList = FretboardHelper.getAllFretboardNotes();
         _secondaryList = null;
         break;
+      case FretboardType.RootNote:
+        _primaryList = FretboardHelper.getAllFretboardNotes().where((note) {
+          return note.note == root;
+        }).toList();
+        _secondaryList = null;
+        break;
       case FretboardType.MajorScale:
         var scale = FretboardHelper.getMajorScale(root);
         _primaryList = FretboardHelper.getAllFretboardNotes().where((note) {
@@ -48,16 +54,17 @@ class FretboardModel extends ChangeNotifier {
         }).toList();
         _secondaryList = null;
         break;
-      case FretboardType.PentatonicScale:
-        var scale = FretboardHelper.getPentatonicScale(root);
+      case FretboardType.PentatonicMajorScale:
+        var scale = FretboardHelper.getPentatonicMajorScale(root);
         _primaryList = FretboardHelper.getAllFretboardNotes().where((note) {
           return scale.contains(note.note);
         }).toList();
         _secondaryList = null;
         break;
-      case FretboardType.RootNote:
+      case FretboardType.PentatonicMinorScale:
+        var scale = FretboardHelper.getPentatonicMinorScale(root);
         _primaryList = FretboardHelper.getAllFretboardNotes().where((note) {
-          return note.note == root;
+          return scale.contains(note.note);
         }).toList();
         _secondaryList = null;
         break;
@@ -82,10 +89,11 @@ class FretboardModel extends ChangeNotifier {
 enum FretboardType {
   Empty,
   AllFretboardNotes,
+  RootNote,
   MajorScale,
   MinorScale,
-  PentatonicScale,
-  RootNote,
+  PentatonicMajorScale,
+  PentatonicMinorScale,
 }
 
 enum FretboardSubtype {
@@ -99,7 +107,8 @@ class FretboardHelper {
 
   static var _majorScales = {};
   static var _minorScales = {};
-  static var _pentatonicScales = {};
+  static var _pentatonicMajorScales = {};
+  static var _pentatonicMinorScales = {};
 
   static void init() {
     if (_allFretboardNotes.isNotEmpty) {
@@ -152,11 +161,24 @@ class FretboardHelper {
       });
     });
 
-    var pentatonicFormat = [2,2,3,2];
+    var pentatonicMajorFormat = [2,2,3,2];
     _noteSequence.forEach((root) {
       var lastNote = root;
-      var scale = _pentatonicScales[root] = [lastNote];
-      pentatonicFormat.forEach((delta) {
+      var scale = _pentatonicMajorScales[root] = [lastNote];
+      pentatonicMajorFormat.forEach((delta) {
+        while(delta > 0) {
+          lastNote = getNextNote(lastNote);
+          delta --;
+        }
+        scale.add(lastNote);
+      });
+    });
+
+    var pentatonicMinorFormat = [3, 2, 2, 3];
+    _noteSequence.forEach((root) {
+      var lastNote = root;
+      var scale = _pentatonicMinorScales[root] = [lastNote];
+      pentatonicMinorFormat.forEach((delta) {
         while(delta > 0) {
           lastNote = getNextNote(lastNote);
           delta --;
@@ -182,9 +204,14 @@ class FretboardHelper {
     return _minorScales[root];
   }
 
-  static List<String> getPentatonicScale(String root) {
+  static List<String> getPentatonicMajorScale(String root) {
     init();
-    return _pentatonicScales[root];
+    return _pentatonicMajorScales[root];
+  }
+
+  static List<String> getPentatonicMinorScale(String root) {
+    init();
+    return _pentatonicMinorScales[root];
   }
 
   static List<int> getFretXList() {

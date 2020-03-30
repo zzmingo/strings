@@ -34,10 +34,11 @@ class Helper {
   static String getFretboardTypeLabel(BuildContext context, FretboardType type) {
     switch (type) {
       case FretboardType.AllFretboardNotes: return "全部音";
+      case FretboardType.RootNote: return "根音";
       case FretboardType.MajorScale: return "大调音阶";
       case FretboardType.MinorScale: return "小调音阶";
-      case FretboardType.PentatonicScale: return "五声音阶";
-      case FretboardType.RootNote: return "根音";
+      case FretboardType.PentatonicMajorScale: return "五声大调音阶";
+      case FretboardType.PentatonicMinorScale: return "五声小调音阶";
       default: return "[未定义]";
     }
   }

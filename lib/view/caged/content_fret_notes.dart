@@ -54,7 +54,8 @@ class _FretNotesContentState extends State<FretNotesContent> {
           var isScale = type == FretboardType.RootNote ||
               type == FretboardType.MajorScale ||
               type == FretboardType.MinorScale ||
-              type == FretboardType.PentatonicScale;
+              type == FretboardType.PentatonicMajorScale ||
+              type == FretboardType.PentatonicMinorScale;
 
 
           if (isScale) {
