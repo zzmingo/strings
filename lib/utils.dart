@@ -84,35 +84,4 @@ class DisplayHelper {
     }
   }
 
-  static List<int> getMeterColumnWeights(String meter) {
-    List<int> columns;
-    switch (meter) {
-      case "1/4": columns = [3]; break;
-      case "2/4": columns = [3,0,1]; break;
-      case "3/4": columns = [3,0,1,0,1]; break;
-      case "4/4": columns = [3,0,1,0,2,0,1]; break;
-      case "3/8": columns = [3,0,1,0,1]; break;
-      case "6/8": columns = [3,0,1,0,1,0,2,0,1,0,1]; break;
-      default:    columns = [3,0,1,0,2,0,1];
-    }
-    return columns;
-  }
-
-//  static String getBeatingSoundName(String key) {
-//    switch (key) {
-//      case "knock": return "物理";
-//      default: return "未知";
-//    }
-//  }
-
-//  static String getBeatingName(String beatingId) {
-//    var beatingData = GlobalData.beatingMap[beatingId];
-//    if (beatingData.mode == BEATING_MODE_INTERVAL_BPM) {
-//      var d = beatingData;
-//      return "渐变 ${d.step > 0 ? "+${d.step}" : d.step} ${d.fromBpm}~${d.toBpm}/${d.interval}";
-//    } else {
-//      return "无限循环";
-//    }
-//  }
-
 }
